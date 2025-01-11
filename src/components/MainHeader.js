@@ -10,7 +10,7 @@ import Image from "next/image";
 
 function MainHeader() {
   return (
-    <section className=" h-auto w-full  border-b-2 border-primary-50">
+    <section className=" h-auto w-full z-50  border-b-2 border-primary-50">
       <div className="flex justify-between items-center max-w-[1200px] m-auto p-3">
         {/* Icon and Logo */}
         <div className="flex items-center justify-center gap-4 w-auto h-auto">

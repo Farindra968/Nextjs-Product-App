@@ -50,7 +50,7 @@ const HeaderCategories = () => {
             className={`${
               activeTab
                 ? "hidden"
-                : "absolute px-2 py-4 top-[168px] rounded-md shadow-lg space-y-3 z-50 bg-white"
+                : "absolute px-2 py-4 top-[168px] rounded-md shadow-lg space-y-3 z-10 bg-white"
             }`}
           >
             {categoriesData.map((items) => (
