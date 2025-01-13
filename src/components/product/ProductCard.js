@@ -4,6 +4,7 @@ import Link from 'next/link'
 import React from 'react'
 import { BiHeart } from 'react-icons/bi'
 import { FiShoppingCart, FiStar } from 'react-icons/fi'
+import broken_image from '@/assets/images/broken_image.svg'
 
 
 const ProductCard = ({ product }) => {
@@ -16,7 +17,7 @@ const ProductCard = ({ product }) => {
       <div className="relative">
         <div className="relative h-64 w-full">
           <Image
-            src={product.url}
+            src={product.url|| broken_image}
             alt={product.name}
             layout="fill"
             objectFit="cover"
@@ -31,7 +32,7 @@ const ProductCard = ({ product }) => {
           </div>
       </div>
       <div className="p-6">
-        <div className="text-sm text-gray-500 mb-2">{product.brand}</div>
+        <div className="text-sm text-gray-500 mb-2">{product.brand || "No Category"}</div>
         <h2 className="h-12 text-xl font-semibold text-gray-800 mb-2">{product.name}</h2>
         <div className="flex items-center mb-4">
           {[...Array(5)].map((_, i) => (

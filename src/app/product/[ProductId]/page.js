@@ -6,6 +6,7 @@ import {  IoMdStar } from "react-icons/io";
 import { IoLogoWhatsapp } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa6";
 import ProductDetails from "@/components/product/ProductDetails";
+import broken_image from '@/assets/images/broken_image.svg'
 
 
 const page = async ({ params }) => {
@@ -24,7 +25,7 @@ const page = async ({ params }) => {
         {/* 1st cols [Product Image] */}
         <div className="w-[80%] h-auto p-6 relative">
           <Image
-            src={product.url}
+            src={product.url || broken_image}
             alt={product.name}
             width={400}
             height={400}
@@ -56,13 +57,13 @@ const page = async ({ params }) => {
             <p className=" font-Poppins  text-text-secondary">
               Categories:{" "}
               <span className="text-text-default font-poppins-medium ">
-                {product.category}
+                {product.category || "No Category"}
               </span>
             </p>
             <p className=" font-Poppins  text-text-secondary">
               Brand:{" "}
               <span className="text-text-default  font-poppins-medium ">
-                {product.brand}
+                {product.brand || "No Brand"}
               </span>
             </p>
             <p className=" font-Poppins  text-text-secondary">
