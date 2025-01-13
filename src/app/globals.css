@@ -2,20 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@font-face {
+  font-family: "Poppins";
+  src: url('/fonts/Poppins-Regular.ttf') format("truetype");
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+@font-face {
+  font-family: "Poppins-Medium";
+  src: url('/fonts/Poppins-Medium.ttf') format("truetype");
 }
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+@font-face {
+  font-family: "Poppins-SemiBold";
+  src: url('/fonts/Poppins-SemiBold.ttf') format("truetype");
+}
+
+@font-face {
+  font-family: "Poppins-Bold";
+  src: url('/fonts/Poppins-Bold.ttf') format("truetype");
 }

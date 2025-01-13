@@ -1,4 +1,6 @@
+import { PRODUCT_ROUTE } from '@/constant/routes'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 import { BiHeart } from 'react-icons/bi'
 import { FiShoppingCart, FiStar } from 'react-icons/fi'
@@ -48,11 +50,13 @@ const ProductCard = ({ product }) => {
             <span className="bg-primary-100  text-primary-800 text-xs font-semibold px-2 py-1 rounded-full">
               Save {Math.round(discountOffer)}%
             </span>
-        </div>
-        <button className="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center transition-colors duration-300">
+          </div>
+          <Link href={`${PRODUCT_ROUTE}/${product._id}`}>
+          <button className="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center transition-colors duration-300">
           <FiShoppingCart className="mr-2 h-5 w-5" />
           Add to Cart
         </button>
+          </Link>
       </div>
     </div>
     </section>

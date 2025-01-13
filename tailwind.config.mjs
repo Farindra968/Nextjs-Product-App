@@ -41,6 +41,12 @@ export default {
         },        
                 
       },
+      fontFamily: {
+        Poppins: ["Poppins"],
+        "poppins-medium": ["Poppins-Medium"],
+        "poppins-semibold": ['Poppins-SemiBold'],
+        "poppins-bold": ['Poppins-Bold']
+      }
     },
   },
   plugins: [],
