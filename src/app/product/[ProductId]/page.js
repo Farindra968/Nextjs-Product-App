@@ -47,7 +47,7 @@ const page = async ({ params }) => {
               1.3k Review
             </span>
           </div>
-          <h1 className="text-xl sm:text-2xl text-primary-800 font-poppins-bold">
+          <h1 className="text-xl capitalize sm:text-2xl text-primary-800 font-poppins-bold">
             {product.name}
           </h1>
 
