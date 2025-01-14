@@ -2,6 +2,8 @@ import {getProduct} from '@/services/api/productApi'
 import {ProductCard} from '@/components/product/ProductCard';
 import { Title } from '@/components/Ui/Title';
 import { TbFilterCog } from 'react-icons/tb';
+import Link from 'next/link';
+import { ADDPRODUCT_ROUTE } from '@/constant/routes';
 
  const productList = async () => {
    const product = await getProduct();
@@ -13,6 +15,7 @@ import { TbFilterCog } from 'react-icons/tb';
         <div className='flex items-center space-x-2'>
         <span className='text-xl text-primary-600'><TbFilterCog /></span>
         <span className='text-xl text-primary-600'><TbFilterCog /></span>
+        <Link href={`${ADDPRODUCT_ROUTE}`} className='bg-primary-600 px-4 py-2 rounded-md text-primary-50 font-poppins-medium'>Add Product</Link>
         </div>
       </div>
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-4'>

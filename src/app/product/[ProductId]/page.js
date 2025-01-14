@@ -1,13 +1,11 @@
 import { getProductId } from "@/services/api/productApi";
 import Image from "next/image";
-import React from "react";
 import { FiShoppingCart } from "react-icons/fi";
-import {  IoMdStar } from "react-icons/io";
+import { IoIosCheckmarkCircle, IoMdStar } from "react-icons/io";
 import { IoLogoWhatsapp } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa6";
 import ProductDetails from "@/components/product/ProductDetails";
-import broken_image from '@/assets/images/broken_image.svg'
-
+import broken_image from "@/assets/images/broken_image.svg";
 
 const page = async ({ params }) => {
   const id = (await params).ProductId;
@@ -17,7 +15,6 @@ const page = async ({ params }) => {
 
   const offerPrice = (product.price * 0.8).toFixed(2);
   const discountOffer = ((product.price - offerPrice) / product.price) * 100;
-
 
   return (
     <section className="max-w-screen-xl m-auto h-auto">
@@ -31,7 +28,7 @@ const page = async ({ params }) => {
             height={400}
           />
           <p className="flex justify-center items-center w-10 h-10 bg-secondary-800 font-poppins-semibold rounded-full text-sm text-white absolute top-2 right-5">
-          {Math.round(discountOffer)}%
+            {Math.round(discountOffer)}%
           </p>
         </div>
         {/* 2nd cols [Product Details] */}
@@ -75,29 +72,39 @@ const page = async ({ params }) => {
             <p className=" font-Poppins  text-text-default">
               Availability:{" "}
               <span className="text-green-600 font-poppins-bold ">
-                In Stock
+                In Stock {product.stock}
               </span>
             </p>
           </div>
           {/* Short Description */}
           <div className="py-4">
-            <p className="font-Poppins text-text-secondary">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation 1 ullamco laboris
-
-            </p>
+            <div>
+              <p className="text-text-secondary font-poppins-medium">
+                Key Specification:
+              </p>
+              {[...Array(5)].map((item) => (
+                <p key={item} className="flex items-center gap-2 py-1 px-2">
+                  <IoIosCheckmarkCircle className="text-text-default" />
+                  <span className="text-sm font-Poppins text-text-default">
+                    14th Generation Intel Core i7 14900HX Processor
+                  </span>
+                </p>
+              ))}
+            </div>
           </div>
           <button className=" bg-secondary-700 hover:bg-secondary-800 text-white font-semibold py-2 px-4 rounded-lg flex items-center justify-center transition-colors duration-300">
-          <IoLogoWhatsapp className="mr-2 h-5 w-5" />
-              Order from WhatsApps
-            </button>
+            <IoLogoWhatsapp className="mr-2 h-5 w-5" />
+            Order from WhatsApps
+          </button>
           <div className="flex items-center gap-4 py-10">
             <p className="text-3xl font-poppins-bold text-primary-700">
-              ${offerPrice}
+              <span className="text-secondary-500 font-sans font-semibold">
+                रु
+              </span>{" "}
+              {offerPrice}
             </p>
             <p className="text-xl line-through font-poppins-semibold text-secondary-600">
-              ${product.price}
+              रु {product.price}
             </p>
           </div>
           {/* Cart Buttom */}
@@ -106,13 +113,15 @@ const page = async ({ params }) => {
               <FiShoppingCart className="mr-2 h-5 w-5" />
               Add to Cart
             </button>
-            <button className=" border-2 border-text-muted rounded-lg flex justify-center items-center p-3 hover:bg-text-muted"><FaRegHeart /></button>
+            <button className=" border-2 border-text-muted rounded-lg flex justify-center items-center p-3 hover:bg-text-muted">
+              <FaRegHeart />
+            </button>
           </div>
         </div>
       </div>
       <section className="py-10">
-        <div >
-          <ProductDetails/>
+        <div>
+          <ProductDetails />
         </div>
       </section>
     </section>

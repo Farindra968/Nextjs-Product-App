@@ -31,9 +31,9 @@ const ProductCard = ({ product }) => {
           Save {Math.round(discountOffer)}%
           </div>
       </div>
-      <div className="p-6">
-        <div className="text-sm text-gray-500 mb-2">{product.brand || "No Category"}</div>
-        <h2 className="h-12 text-xl font-semibold text-gray-800 mb-2">{product.name}</h2>
+      <div className="px-4 py-6">
+        <div className="text-sm inline-block font-semibold px-2 bg-primary-300 rounded-md text-primary-900 mb-2">{product.brand || "No Category"}</div>
+        <h2 className="h-12 text-[18px] font-semibold text-primary-800 mb-2">{product.name}</h2>
         <div className="flex items-center mb-4">
           {[...Array(5)].map((_, i) => (
             <svg key={i} className={`w-4 h-4 ${i < 4.5 ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
@@ -44,9 +44,9 @@ const ProductCard = ({ product }) => {
         </div>
         <div className="flex items-center justify-between mb-4">
           <div className='flex flex-col'>
-            <span className="text-2xl font-bold text-primary-800">${(offerPrice)}</span>
+            <span className="text-2xl font-bold text-primary-800">रु {Math.round(offerPrice)}</span>
 
-              <span className="text-sm text-text-muted line-through ml-2">${product.price }</span>
+              <span className="text-sm text-text-muted line-through ml-2">रु {product.price }</span>
           </div>
             <span className="bg-primary-100  text-primary-800 text-xs font-semibold px-2 py-1 rounded-full">
               Save {Math.round(discountOffer)}%
