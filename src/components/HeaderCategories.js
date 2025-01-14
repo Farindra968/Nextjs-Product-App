@@ -8,8 +8,8 @@ import { FcFlashAuto } from "react-icons/fc";
 import { PRODUCT_ROUTE } from "@/constant/routes";
 
 
-const HeaderCategories = () => {
-  const [activeTab, setActiveTab] = useState(false); // Initialize with a boolean
+const HeaderCategories = ({hideCategories=true,}) => {
+  const [activeTab, setActiveTab] = useState(); // Initialize with a boolean
 
   const handleTab = () => {
     setActiveTab((prev) => !prev); // Toggle the boolean state
@@ -52,8 +52,8 @@ const HeaderCategories = () => {
           <div
             className={`${
               activeTab
-                ? "hidden"
-                : "absolute px-2 py-4 top-[168px] rounded-md shadow-lg space-y-3 z-10 bg-white"
+                ? "absolute px-2 py-4 top-[168px] rounded-md shadow-lg space-y-3 z-10 bg-white"
+                :"hidden "
             }`}
           >
             {categoriesData.map((items) => (
