@@ -33,7 +33,7 @@ const ProductCard = ({ product }) => {
       </div>
       <div className="px-4 py-6">
         <span className="text-xs sm:text-sm inline-block font-semibold px-2 bg-primary-300 rounded-md text-primary-900 mb-2">{product.brand || "No Category"}</span>
-        <h2 className=" h-10 text-sm sm:text-[18px] font-semibold text-primary-800 mb-2">{product.name}</h2>
+        <h2 className=" h-12 text-sm sm:text-[18px] font-semibold text-primary-800 mb-2">{product.name}</h2>
         <div className="flex flex-col sm:flex-row items-start mb-1 sm:mb-4">
           <div className="flex items-center">
           {[...Array(5)].map((_, i) => (
@@ -45,7 +45,7 @@ const ProductCard = ({ product }) => {
           <span className="text-gray-500 text-sm ml-2">20 Review</span>
         </div>
         <div className="flex items-center justify-between sm:mb-4">
-          <div className='flex items-center gap-2 sm:flex-col'>
+          <div className='flex flex-col'>
             <span className="text-2xl font-bold text-primary-800">रु {Math.round(offerPrice)}</span>
               <span className="text-sm text-text-muted line-through ml-2">रु {product.price }</span>
           </div>
