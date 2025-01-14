@@ -18,7 +18,7 @@ import { ADDPRODUCT_ROUTE } from '@/constant/routes';
         <Link href={`${ADDPRODUCT_ROUTE}`} className='bg-primary-600 px-4 py-2 rounded-md text-primary-50 font-poppins-medium'>Add Product</Link>
         </div>
       </div>
-      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-4'>
+      <div className='grid grid-cols-2 lg:grid-cols-4 gap-4 py-4'>
         {
           product.map((product) => (
             <ProductCard key={product._id} product={product} />

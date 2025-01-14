@@ -15,7 +15,7 @@ const ProductCard = ({ product }) => {
     <section>
    <div className="bg-white rounded-xl overflow-hidden  transition-all duration-300 shadow-md">
       <div className="relative">
-        <div className="relative h-64 w-full">
+        <div className="relative h-44 sm:h-64 w-full">
           <Image
             src={product.url|| broken_image}
             alt={product.name}
@@ -32,29 +32,30 @@ const ProductCard = ({ product }) => {
           </div>
       </div>
       <div className="px-4 py-6">
-        <div className="text-sm inline-block font-semibold px-2 bg-primary-300 rounded-md text-primary-900 mb-2">{product.brand || "No Category"}</div>
-        <h2 className="h-12 text-[18px] font-semibold text-primary-800 mb-2">{product.name}</h2>
-        <div className="flex items-center mb-4">
+        <span className="text-xs sm:text-sm inline-block font-semibold px-2 bg-primary-300 rounded-md text-primary-900 mb-2">{product.brand || "No Category"}</span>
+        <h2 className=" h-10 text-sm sm:text-[18px] font-semibold text-primary-800 mb-2">{product.name}</h2>
+        <div className="flex flex-col sm:flex-row items-start mb-1 sm:mb-4">
+          <div className="flex items-center">
           {[...Array(5)].map((_, i) => (
             <svg key={i} className={`w-4 h-4 ${i < 4.5 ? 'text-yellow-400' : 'text-gray-300'}`} fill="currentColor" viewBox="0 0 20 20">
               <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
             </svg>
           ))}
+              </div>
           <span className="text-gray-500 text-sm ml-2">20 Review</span>
         </div>
-        <div className="flex items-center justify-between mb-4">
-          <div className='flex flex-col'>
+        <div className="flex items-center justify-between sm:mb-4">
+          <div className='flex items-center gap-2 sm:flex-col'>
             <span className="text-2xl font-bold text-primary-800">रु {Math.round(offerPrice)}</span>
-
               <span className="text-sm text-text-muted line-through ml-2">रु {product.price }</span>
           </div>
-            <span className="bg-primary-100  text-primary-800 text-xs font-semibold px-2 py-1 rounded-full">
+            <span className="hidden sm:inline-block bg-primary-100  text-primary-800 text-xs font-semibold px-2 py-1 rounded-full">
               Save {Math.round(discountOffer)}%
             </span>
           </div>
           <Link href={`${PRODUCT_ROUTE}/${product._id}`}>
           <button className="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center transition-colors duration-300">
-          <FiShoppingCart className="mr-2 h-5 w-5" />
+          <FiShoppingCart className="hidden sm:inline-block mr-2 h-5 w-5" />
           Add to Cart
         </button>
           </Link>
