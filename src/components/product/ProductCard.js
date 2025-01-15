@@ -1,10 +1,11 @@
-import { PRODUCT_ROUTE } from "@/constant/routes";
+import { EDITPRODUCT_ROUTE, PRODUCT_ROUTE } from "@/constant/routes";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 import { BiHeart } from "react-icons/bi";
 import { FiShoppingCart, FiStar } from "react-icons/fi";
 import broken_image from "@/assets/images/broken_image.svg";
+import { MdEditSquare } from "react-icons/md";
 
 const ProductCard = ({ product }) => {
   const offerPrice = (product.price * 0.8).toFixed(2);
@@ -24,7 +25,9 @@ const ProductCard = ({ product }) => {
             />
           </div>
           <div className="absolute top-4 right-4 bg-white rounded-full p-2 shadow-md">
-            <BiHeart className="h-5 w-5 text-gray-500 hover:text-red-500 cursor-pointer transition-colors duration-300" />
+            <Link href={`${PRODUCT_ROUTE}/edit/${product._id}`}>
+            <MdEditSquare className="h-5 w-5 text-gray-500  cursor-pointer transition-colors duration-300" />
+            </Link>
           </div>
           <div className="absolute top-4 left-4 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-md">
             Save {Math.round(discountOffer)}%

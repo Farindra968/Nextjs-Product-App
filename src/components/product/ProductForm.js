@@ -1,23 +1,43 @@
 "use client";
-
-import { postProduct } from "@/services/api/productApi";
+import { PRODUCT_ROUTE } from "@/constant/routes";
+import { editProduct, postProduct } from "@/services/api/productApi";
+import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 
-const AddForm = () => {
-  const { register, handleSubmit } = useForm();
-  const [ isLoading, setLoading ] = useState(false);
+const ProductForm = (isEditing = false, product) => {
+  const { register, handleSubmit } = useForm({
+    values: product, // fetcing product data
+  });
+  const [isLoading, setLoading] = useState(false); /// loading
+
+  const router = useRouter(); /// Refresh back to Product Page after edit or upload product
 
   async function submitForm(data) {
-    setLoading(true);
+    setLoading(true); /// loading true
     try {
-      await postProduct(data);
-      toast.success('Product add Sucessfully')
-    } catch (error) {
-      toast.error(error.response.data);
+      isEditing
+        ? await editProduct(product._id, data)
+        : await postProduct(data);
+      
+      toast.success(
+        isEditing ? "Product edit Sucessfully" : "Product add Sucessfully",
+        {
+          autoClose: 1500,
+          onClose: () => { router.replace(PRODUCT_ROUTE) }
+        }
+      );
+
+    } catch (error) { // detec error if error occur
+      toast.error(error.response.data,
+        {
+          autoClose: 1500,  // auto close after detech error
+        }
+      );
+
     } finally {
-      setLoading(false);
+      setLoading(false); /// loading false at the end
     }
   }
   return (
@@ -105,14 +125,17 @@ const AddForm = () => {
         </div>
         <input
           type="submit"
-          value={isLoading ?'Submiting':'Submit'}
+          value={isLoading ?
+            "Submiting"
+            : isEditing
+            ? "Edit"
+            : "Submit"}
           className="font-poppins-semibold text-white outline-none bg-primary-500 focus:outline-2 outline-primary-500 rounded-md outline-offset-2 my-4  px-6 py-2"
         />
       </form>
       <ToastContainer />
-
     </section>
   );
 };
 
-export default AddForm;
+export default ProductForm;
