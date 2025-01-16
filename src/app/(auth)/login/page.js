@@ -9,7 +9,7 @@ const page = () => {
       <div className='w-full hidden md:flex justify-center items-center bg-primary-800 h-full rounded-l-md'>
         <ImageBox/>
       </div>
-      <div className='w-[80%] px-6 md:px-12'>
+      <div className='w-full md:w-[80%] px-6 md:px-12'>
       <LoginForm/>
       </div>
       

@@ -1,9 +1,10 @@
 import config from "@/config/config";
 import axios from "axios";
+import { apiToken } from "./autToken";
 
 /// Fetching Product Data [R]
 const getProduct = async () => {
-  const response = await axios.get(`${config.apiUrl}/api/products?limit=100`);
+  const response = await axios.get(`${config.apiUrl}/api/products?limit=100&sort={"createdAt":-1}`);
   return response.data;
 };
 
@@ -17,7 +18,7 @@ const getProductId = async (id) => {
 const postProduct = async (data) => {
   const response = await axios.post(`${config.apiUrl}/api/products/`, data, {
     headers: {
-      Authorization: `Bearer ${config.apiToken}`,
+      Authorization: `Bearer ${apiToken}`,
     },
   });
   return response.data;
@@ -30,7 +31,7 @@ const editProduct = async (id, data) => {
     data,
     {
       headers: {
-        Authorization: `Bearer ${config.apiToken}`,
+        Authorization: `Bearer ${apiToken}`,
       },
     }
   );

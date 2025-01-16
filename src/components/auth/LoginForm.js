@@ -19,7 +19,7 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm();
 
-  const router = useRouter; //function navigate to home page after sucessfull login
+  const router = useRouter(); //function navigate to home page after sucessfull login
 
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false); // hide and show password
@@ -27,23 +27,27 @@ const LoginForm = () => {
     setShowPassword(!showPassword);
   };
 
-  async function submitForm(data) {
-    setLoading(true);
+  const submitForm = async (data) => {
+    setLoading(true)
     try {
-      await loginApi(data);
+      const response = await loginApi(data);
+      
+      console.log(response)
 
-      toast.success("Login Sucessfully", {
+      localStorage.setItem("apiToken", response.token);
+      toast.success('Login Successful', {
         autoClose: 1200,
       });
+      
       router.push(HOME_ROUTE);
     } catch (error) {
-      toast.error(error.response.data, {
+      toast.error(error.response?.data || 'An error occurred', {
         autoClose: 1500,
       });
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
-  }
+  };
   return (
     <div>
       <div>
@@ -63,7 +67,7 @@ const LoginForm = () => {
             >
               Email
             </label>
-            <div className="w-auto flex justify-between items-center gap-3 border-b-2 bg-gray-200 border-text-muted my-2 p-1 ">
+            <div className="w-auto flex justify-between items-center gap-3 border-b-2 border-text-muted my-2 p-1 ">
               <MdEmail className="mx-2" />
               <input
                 type="email"
@@ -87,7 +91,7 @@ const LoginForm = () => {
             >
               Password
             </label>
-            <div className="w-auto flex justify-between items-center gap-3 border-b-2 bg-gray-200 border-text-muted my-2 p-1 ">
+            <div className="w-auto flex justify-between items-center gap-3 border-b-2 border-text-muted my-2 p-1 ">
               <MdPassword className="mx-2" />
               <input
                 type={showPassword ? "text" : "password"}
