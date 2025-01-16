@@ -6,10 +6,11 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 
-const ProductForm = (isEditing = false, product) => {
+const ProductForm = ({isEditing = false, product}) => {
   const { register, handleSubmit } = useForm({
     values: product, // fetcing product data
   });
+  
   const [isLoading, setLoading] = useState(false); /// loading
 
   const router = useRouter(); /// Refresh back to Product Page after edit or upload product

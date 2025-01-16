@@ -33,7 +33,7 @@ const HeaderCategories = ({hideCategories=true,}) => {
   ]
 
   return (
-    <section className="h-auto w-full hidden lg:block border-b-2 border-primary-50">
+    <section className="h-auto w-full hidden lg:block border-b-2 border-primary-50 dark:border-gray-700">
       <div className="max-w-[1200px] m-auto p-2">
         <div className="flex justify-between items-center">
           <div
@@ -52,14 +52,14 @@ const HeaderCategories = ({hideCategories=true,}) => {
           <div
             className={`${
               activeTab
-                ? "absolute px-2 py-4 top-[168px] rounded-md shadow-lg space-y-3 z-10 bg-white"
+                ? "absolute px-2 py-4 top-[168px] rounded-md shadow-lg space-y-3 z-10 bg-white dark:bg-gray-600"
                 :"hidden "
             }`}
           >
             {categoriesData.map((items) => (
               <p
                 key={items.path}
-                className="flex py-1 justify-between border-b-2 border-primary-50 items-center gap-4 text-text-default hover:bg-primary-100 rounded-md px-4"
+                className="flex py-1 justify-between border-b-2 border-primary-50 dark:border-gray-700 items-center gap-4 text-text-default dark:text-primary-50 hover:bg-primary-100 hover:dark:bg-primary-800 px-4"
               >
                 {items.label}
                 <IoIosArrowForward />
@@ -70,9 +70,9 @@ const HeaderCategories = ({hideCategories=true,}) => {
             <div className="flex items-center">
               {
                 otherData.map((items, index) => (
-                  <p key={index} className="flex items-center justify-center gap-2 text-primary cursor-pointer border-r-2 border-primaryText px-3">
-                  <span className="text-text-muted font-medium">{items.label}</span>
-                  <span className="text-primary-700">{items.icon}</span>
+                  <p key={index} className="flex items-center justify-center gap-2 text-primary cursor-pointer border-r-2 border-primaryText dark:border-gray-500 px-3">
+                  <span className="text-text-muted dark:text-primary-50 font-Poppins text-sm">{items.label}</span>
+                  <span className="text-primary-700 dark:text-primary-400">{items.icon}</span>
                 </p>
                 ))
               }

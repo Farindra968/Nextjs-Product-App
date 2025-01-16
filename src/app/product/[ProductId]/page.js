@@ -17,7 +17,7 @@ const page = async ({ params }) => {
   const discountOffer = ((product.price - offerPrice) / product.price) * 100;
 
   return (
-    <section className="max-w-screen-xl m-auto h-auto">
+    <section className="max-w-screen-xl m-auto h-auto bg-white dark:bg-transparent">
       <div className="flex flex-col lg:flex-row justify-center items-center py-6">
         {/* 1st cols [Product Image] */}
         <div className="w-[80%] h-auto p-6 relative">
@@ -41,37 +41,37 @@ const page = async ({ params }) => {
               ))}
               <IoMdStar />
             </div>
-            <span className=" text-gray-600 text-sm rounded-md font-Poppins ">
+            <span className=" text-gray-600 dark:text-gray-100 text-sm rounded-md font-Poppins ">
               1.3k Review
             </span>
           </div>
-          <h1 className="text-xl capitalize sm:text-2xl text-primary-800 font-poppins-bold">
+          <h1 className="text-xl capitalize sm:text-2xl md:text-3xl text-primary-800 dark:text-gray-200 font-poppins-bold">
             {product.name}
           </h1>
 
           {/* Categories, Brand, SKU  */}
-          <div className="py-4 grid grid-cols-1 sm:grid-cols-2 border-b-2 border-gray-200 ">
-            <p className=" font-Poppins  text-text-secondary">
+          <div className="py-4 grid grid-cols-1 sm:grid-cols-2 border-b-2 border-gray-200 dark:border-gray-700 ">
+            <p className=" font-Poppins  text-text-secondary dark:text-gray-200">
               Categories:{" "}
-              <span className="text-text-default font-poppins-medium ">
+              <span className="text-text-default dark:text-secondary-200 font-poppins-medium ">
                 {product.category || "No Category"}
               </span>
             </p>
-            <p className=" font-Poppins  text-text-secondary">
+            <p className=" font-Poppins  text-text-secondary dark:text-gray-100">
               Brand:{" "}
-              <span className="text-text-default  font-poppins-medium ">
+              <span className="text-text-default dark:text-primary-200  font-poppins-medium ">
                 {product.brand || "No Brand"}
               </span>
             </p>
-            <p className=" font-Poppins  text-text-secondary">
+            <p className=" font-Poppins  text-text-secondary dark:text-gray-100">
               SKU:{" "}
-              <span className="text-text-default  font-poppins-medium ">
+              <span className="text-text-default dark:text-gray-200 font-poppins-medium ">
                 MGFTX202
               </span>
             </p>
-            <p className=" font-Poppins  text-text-default">
+            <p className=" font-Poppins  text-text-secondary dark:text-gray-100">
               Availability:{" "}
-              <span className="text-green-600 font-poppins-bold ">
+              <span className="text-green-600 dark:text-green-300 font-poppins-bold ">
                 In Stock {product.stock}
               </span>
             </p>
@@ -79,13 +79,13 @@ const page = async ({ params }) => {
           {/* Short Description */}
           <div className="py-4">
             <div>
-              <p className="text-text-secondary font-poppins-medium">
+              <p className="text-text-secondary dark:text-gray-300 font-poppins-medium">
                 Key Specification:
               </p>
               {[...Array(5)].map((item) => (
                 <p key={item} className="flex items-center gap-2 py-1 px-2">
-                  <IoIosCheckmarkCircle className="text-text-default" />
-                  <span className="text-sm font-Poppins text-text-default">
+                  <IoIosCheckmarkCircle className="text-text-default dark:text-gray-200" />
+                  <span className="text-sm font-Poppins text-text-default dark:text-gray-200">
                     14th Generation Intel Core i7 14900HX Processor
                   </span>
                 </p>
@@ -97,13 +97,13 @@ const page = async ({ params }) => {
             Order from WhatsApps
           </button>
           <div className="flex items-center gap-4 py-10">
-            <p className="text-3xl font-poppins-bold text-primary-700">
+            <p className="text-3xl font-poppins-bold text-primary-700 dark:text-primary-300">
               <span className="text-secondary-500 font-sans font-semibold">
                 रु
               </span>{" "}
-              {offerPrice}
+              {Math.round(offerPrice)}
             </p>
-            <p className="text-xl line-through font-poppins-semibold text-secondary-600">
+            <p className="text-xl line-through font-poppins-semibold text-secondary-600 dark:text-secondary-400">
               रु {product.price}
             </p>
           </div>
@@ -113,7 +113,7 @@ const page = async ({ params }) => {
               <FiShoppingCart className="mr-2 h-5 w-5" />
               Add to Cart
             </button>
-            <button className=" border-2 border-text-muted rounded-lg flex justify-center items-center p-3 hover:bg-text-muted">
+            <button className=" border-2 border-text-muted rounded-lg flex justify-center items-center p-3 dark:text-gray-200 hover:dark:text-text-default hover:bg-gray-200">
               <FaRegHeart />
             </button>
           </div>

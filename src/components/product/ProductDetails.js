@@ -33,9 +33,9 @@ const ProductDetails = () => {
             onClick={() => toggletab(items.id)}
             className={`${
               isActive === items.id
-                ? "bg-primary-100  rounded-md px-2 py-1"
+                ? "bg-primary-100 dark:text-gray-700  rounded-md px-2 py-1"
                 : " "
-            }px-2 py-1`}
+            }px-2 text-text-default dark:text-gray-100 py-1`}
           >
             {items.label}
           </p>
@@ -43,7 +43,7 @@ const ProductDetails = () => {
       </div>
       {isActive === 1 && (
         <div className="space-y-4 py-4 px-2">
-          <p className="font-Poppins text-text-default">
+          <p className="font-Poppins text-text-default dark:text-gray-200">
             The iPhone 16, unveiled by Apple in September 2024, introduces
             several notable enhancements over its predecessor. Available in
             6.1-inch and 6.7-inch (iPhone 16 Plus) display sizes, it features a
@@ -55,14 +55,14 @@ const ProductDetails = () => {
             aluminum design with a color-infused glass back, offered in five
             vibrant colors: black, white, pink, teal, and ultramarine.{" "}
           </p>
-          <p className="font-Poppins text-text-default">
+          <p className="font-Poppins text-text-default dark:text-gray-200">
             Powered by the new A18 chip, the iPhone 16 delivers significant
             performance improvements and increased energy efficiency,
             contributing to a substantial boost in battery life. The device
             supports Wi-Fi 7, ensuring faster and more reliable wireless
             connectivity.{" "}
           </p>
-          <p className="font-Poppins text-text-default">
+          <p className="font-Poppins text-text-default dark:text-gray-200">
             A standout feature is the 48-megapixel Fusion camera, arranged
             vertically, which offers enhanced photo and video capabilities,
             including spatial photo and video capture for immersive experiences.
@@ -70,7 +70,7 @@ const ProductDetails = () => {
             intuitive access to camera functions, streamlining the photography
             experience.{" "}
           </p>
-          <p className="font-Poppins text-text-default">
+          <p className="font-Poppins text-text-default dark:text-gray-200">
             Additionally, the iPhone 16 incorporates the Action Button,
             previously exclusive to Pro models, allowing for customizable quick
             access to various functions. The device is built for Apple

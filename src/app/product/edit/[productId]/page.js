@@ -1,18 +1,19 @@
-import ProductForm from '@/components/product/ProductForm'
-import { getProductId } from '@/services/api/productApi'
-import React from 'react'
+import ProductForm from "@/components/product/ProductForm";
+import { getProductId } from "@/services/api/productApi";
+import React from "react";
 
-const EditProduct = async({params}) => {
-    const id = (await params).productId;
+const EditProduct = async ({ params }) => {
+  const id = (await params).productId;
 
-    const product = await getProductId(id);
+  const product = await getProductId(id);
   return (
-    <section className='max-w-screen-xl m-auto px-14 py-10'>
+    <section className="max-w-screen-xl m-auto px-14 py-10">
       <div>
-              <ProductForm isEditing={true} product={product} />
+        <ProductForm isEditing={true} product={product} />
       </div>
     </section>
-  )
-}
+    
+  );
+};
 
-export default EditProduct
+export default EditProduct;
