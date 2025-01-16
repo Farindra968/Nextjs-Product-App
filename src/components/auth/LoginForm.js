@@ -63,7 +63,7 @@ const LoginForm = () => {
             >
               Email
             </label>
-            <div className="w-auto md:w-2/3 flex justify-between items-center gap-3 border-b-2 bg-gray-200 border-text-muted my-2 p-1 ">
+            <div className="w-auto flex justify-between items-center gap-3 border-b-2 bg-gray-200 border-text-muted my-2 p-1 ">
               <MdEmail className="mx-2" />
               <input
                 type="email"
@@ -87,7 +87,7 @@ const LoginForm = () => {
             >
               Password
             </label>
-            <div className="w-auto md:w-2/3 flex justify-between items-center gap-3 border-b-2 bg-gray-200 border-text-muted my-2 p-1 ">
+            <div className="w-auto flex justify-between items-center gap-3 border-b-2 bg-gray-200 border-text-muted my-2 p-1 ">
               <MdPassword className="mx-2" />
               <input
                 type={showPassword ? "text" : "password"}
@@ -105,7 +105,7 @@ const LoginForm = () => {
             <p className="font-poppins-medium text-secondary-700">
               {errors.password?.message}
             </p>
-            <div className="flex justify-between items-center md:w-2/3">
+            <div className="flex justify-between items-center w-auto">
               <p className="flex items-center gap-2">
                 <input type="checkbox" defaultValue={false} />
                 <span className="font-poppins-medium text-primary-700 hover:text-primary-800 hover:underline  dark:text-gray-200 ">
