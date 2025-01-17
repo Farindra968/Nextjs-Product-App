@@ -47,9 +47,7 @@ const LoginForm = () => {
   return (
     <div>
       <div>
-        <div className="py-6">
-          <Image src={logo} alt="Login" width={75} height={75} />
-        </div>
+
         <h1 className="font-poppins-bold text-3xl dark:text-primary-50">
           Login
         </h1>
