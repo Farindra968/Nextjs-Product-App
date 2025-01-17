@@ -1,10 +1,10 @@
 import React from 'react'
 import auth from '@/assets/images/auth.png'
 import Image from 'next/image'
-const ImageBox = () => {
+const ImageBox = ({image}) => {
   return (
     <div>
-          <Image src={auth} alt='Login/Signup' height={400} width={400} className=' ' />
+          <Image src={image} alt='Login/Signup' height={450} width={450} className=' ' />
     </div>
   )
 }

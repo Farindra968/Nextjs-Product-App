@@ -6,6 +6,7 @@ import { IoLogoWhatsapp } from "react-icons/io5";
 import { FaRegHeart } from "react-icons/fa6";
 import ProductDetails from "@/components/product/ProductDetails";
 import broken_image from "@/assets/images/broken_image.svg";
+import { FaUserCircle } from "react-icons/fa";
 
 const page = async ({ params }) => {
   const id = (await params).ProductId;
@@ -116,6 +117,10 @@ const page = async ({ params }) => {
             <button className=" border-2 border-text-muted rounded-lg flex justify-center items-center p-3 dark:text-gray-200 hover:dark:text-text-default hover:bg-gray-200">
               <FaRegHeart />
             </button>
+          </div>
+          <div className="font-Poppins flex items-center gap-2 py-4">
+            <FaUserCircle className="text-primary-700 dark:text-primary-400" />
+              <p className="text-text-default dark:text-gray-300">Seller: <span className="">{product.createdBy}</span></p> 
           </div>
         </div>
       </div>

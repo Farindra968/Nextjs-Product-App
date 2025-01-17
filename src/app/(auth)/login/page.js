@@ -1,13 +1,15 @@
 import ImageBox from '@/components/auth/ImageBox'
 import LoginForm from '@/components/auth/LoginForm'
 import React from 'react'
+import Login from '@/assets/images/auth.png'
+
 
 const page = () => {
   return (
     <section className='max-w-screen-lg mx-auto p-4 md:p-6 '>
     <div className='flex  justify-between items-center h-[90vh] shadow-md rounded-md '>
       <div className='w-full hidden md:flex justify-center items-center bg-primary-800 h-full rounded-l-md'>
-        <ImageBox/>
+        <ImageBox image={Login}/>
       </div>
       <div className='w-full md:w-[80%] px-6 md:px-12'>
       <LoginForm/>
