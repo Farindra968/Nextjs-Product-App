@@ -1,7 +1,7 @@
-import ImageBox from '@/components/auth/ImageBox'
 import LoginForm from '@/components/auth/LoginForm'
 import React from 'react'
 import Login from '@/assets/images/auth.png'
+import ImageBox from '@/components/Ui/ImageBox.js'
 
 
 const page = () => {

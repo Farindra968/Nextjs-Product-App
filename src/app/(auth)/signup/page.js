@@ -1,4 +1,4 @@
-import ImageBox from '@/components/auth/ImageBox'
+import ImageBox from '@/components/Ui/ImageBox'
 import SignupForm from '@/components/auth/SignupForm'
 import React from 'react'
 import signup from '@/assets/images/signup.png'

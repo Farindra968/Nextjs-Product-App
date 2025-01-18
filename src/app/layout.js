@@ -1,8 +1,7 @@
 import "./globals.css";
 import config from "@/config/config";
-import TopHeader from "@/components/TopHeader";
-import MainHeader from "@/components/MainHeader";
-import HeaderCategories from "@/components/HeaderCategories";
+
+import MainLayout from "@/layout/MainLayout";
 
 export const metadata = {
   title: config.appName,
@@ -11,16 +10,18 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="light">
+    <html lang="en" className="dark">
       <body className="dark:bg-gray-800">
-        <TopHeader />
+        {/* <TopHeader />
         <div className="w-full z-50 sticky top-0 bg-white dark:bg-gray-800">
           <MainHeader/>
         </div>
         <div>
           <HeaderCategories/>
         </div>
-        {children}
+        {children} */}
+                <MainLayout>{children}</MainLayout>
+
       </body>
     </html>
   );
