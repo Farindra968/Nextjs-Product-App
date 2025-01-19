@@ -11,6 +11,8 @@ import { HOME_ROUTE, SIGNUP_ROUTE } from "@/constant/routes";
 import { loginApi } from "@/services/api/authApi";
 import PasswordField from "../Ui/PasswordField";
 import EmailField from "../Ui/EmailField";
+import { useDispatch } from "react-redux";
+import { loginUser } from "@/redux/auth/authAction";
 
 const LoginForm = () => {
   const {
@@ -23,31 +25,13 @@ const LoginForm = () => {
 
   const [loading, setLoading] = useState(false);
 
+  const dispatch = useDispatch();
   const submitForm = async (data) => {
-    setLoading(true);
-    try {
-      const response = await loginApi(data);
-
-      console.log(response);
-
-      localStorage.setItem("apiToken", response.token);
-      toast.success("Login Successful", {
-        autoClose: 1200,
-      });
-
-      router.push(HOME_ROUTE);
-    } catch (error) {
-      toast.error(error.response?.data || "An error occurred", {
-        autoClose: 1500,
-      });
-    } finally {
-      setLoading(false);
-    }
+    dispatch(loginUser(data));
   };
   return (
     <div>
       <div>
-
         <h1 className="font-poppins-bold text-3xl dark:text-primary-50">
           Login
         </h1>
@@ -108,7 +92,7 @@ const LoginForm = () => {
             <div className="py-4">
               <input
                 type="submit"
-                value={loading ? "Submitting" : "Login"}
+                value={loginUser ? "Login" : "Submitting"}
                 className="bg-primary-800 px-6 p-2 rounded-md font-Poppins text-primary-50"
               />
             </div>
