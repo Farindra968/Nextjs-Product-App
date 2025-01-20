@@ -2,8 +2,10 @@ import ImageBox from '@/components/Ui/ImageBox'
 import SignupForm from '@/components/auth/SignupForm'
 import React from 'react'
 import signup from '@/assets/images/signup.png'
+import { useSelector } from 'react-redux'
 
 const page = () => {
+
   return (
     <section className='max-w-screen-lg mx-auto p-4 md:p-6 '>
     <div className='flex flex-row-reverse  justify-between items-center h-[100vh] shadow-md rounded-md '>

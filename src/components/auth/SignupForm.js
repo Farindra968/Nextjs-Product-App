@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
@@ -11,6 +11,8 @@ import PasswordField from "../Ui/PasswordField";
 import EmailField from "../Ui/EmailField";
 import InputField from "../Ui/InputField";
 import PASSWORD_REGEX from '@/constant/regex.js'
+import { useDispatch, useSelector } from "react-redux";
+import { registerUser } from "@/redux/auth/authAction";
 
 const SignupForm = () => {
   const {
@@ -20,31 +22,18 @@ const SignupForm = () => {
     watch,
   } = useForm();
 
-  const router = useRouter(); //function navigate to home page after sucessfull login
-
-  const [loading, setLoading] = useState(false);
+  const {loading, error } = useSelector((state) => state.auth)
+  const dispatch = useDispatch();
   const password = watch("password"); // towatch the password between password and conform password
 
   const submitForm = async (data) => {
-    setLoading(true);
-    try {
-      const response = await signupApi(data);
-
-        console.log(response);
-        localStorage.setItem("authToken", response.token)
-      toast.success("Account Created Sucessfully", {
-          autoClose: 1200,
-          onClose: ()=> router.push(HOME_ROUTE)
-      });
-
-    } catch (error) {
-      toast.error(error.response?.data || "An error occurred", {
-        autoClose: 1500,
-      });
-    } finally {
-      setLoading(false);
-    }
+    dispatch(registerUser(data));
   };
+  
+
+  useEffect(() => { 
+    toast.error(error)
+  }, [error]);
   return (
     <div>
       <div className="pt-10">

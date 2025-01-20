@@ -20,7 +20,7 @@ import { logOutUser } from "@/redux/auth/authSlice";
 function MainHeader() {
   const { user } = useSelector((state) => state.auth); /// extreact user from redux state management
 
-  const [showProfile, setShowProfile] = useState(true); // hide and show profile function
+  const [showProfile, setShowProfile] = useState(false); // hide and show profile function
   const toggleProfile = () => {
     setShowProfile(!showProfile);
   };
@@ -35,7 +35,7 @@ function MainHeader() {
   const menuItems = [
     { icon: FaRegUserCircle, text: "Account", href: "/" },
     { icon: IoSettingsOutline, text: "Settings", href: "/" },
-    { icon: FiPackage, text: "Products", href: {PRODUCT_ROUTE} },
+    { icon: FiPackage, text: "Products", href: `${PRODUCT_ROUTE}` },
     { icon: CiCreditCard2, text: "Billing", href: "/" },
     { icon: IoMdHelpCircleOutline, text: "Help", href: "/" },
 
@@ -96,10 +96,10 @@ function MainHeader() {
               </div>
               <div className="md:flex md:flex-col hidden">
                 <span className="font-poppins-medium text-sm">
-                  Welcome Farindra
+                  Welcome {user.name}
                 </span>
                 <span className="font-poppins-medium text-xs">
-                  abc@gmail.com
+                  {user.email}
                 </span>
               </div>
             </div>
@@ -119,8 +119,8 @@ function MainHeader() {
             <div
               className={`${
                 showProfile
-                  ? "hidden"
-                  : "py-1 bg-white w-52 z-40 rounded-md shadow-md shadow-gray-500 absolute top-14 right-0"
+                  ? "py-1 bg-white w-52 z-40 rounded-md shadow-md shadow-gray-500 absolute top-14 right-0"
+                  : "hidden"
               }`}
               role="menu"
               aria-orientation="vertical"
