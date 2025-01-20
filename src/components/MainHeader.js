@@ -6,30 +6,39 @@ import { FiPackage, FiUser } from "react-icons/fi";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { BsSearch } from "react-icons/bs";
 import { TfiMenuAlt } from "react-icons/tfi";
-import Image from "next/image";
-import { MdLightMode } from "react-icons/md";
-import {
-  IoMdCheckmarkCircleOutline,
-  IoMdHelpCircleOutline,
-} from "react-icons/io";
+import { IoMdHelpCircleOutline } from "react-icons/io";
 import { CiCreditCard2 } from "react-icons/ci";
 import { FaRegUserCircle } from "react-icons/fa";
 import { IoSettingsOutline } from "react-icons/io5";
 import Link from "next/link";
-import { SIGNUP_ROUTE } from "@/constant/routes";
+import { PRODUCT_ROUTE, SIGNUP_ROUTE } from "@/constant/routes";
+import { useDispatch, useSelector } from "react-redux";
+import userProfile from "@/assets/images/userProfile.jpg";
+import Image from "next/image";
+import { logOutUser } from "@/redux/auth/authSlice";
 
 function MainHeader() {
-  const [showProfile, setShowProfile] = useState(true);
+  const { user } = useSelector((state) => state.auth); /// extreact user from redux state management
+
+  const [showProfile, setShowProfile] = useState(true); // hide and show profile function
   const toggleProfile = () => {
     setShowProfile(!showProfile);
   };
+
+  const dispatch = useDispatch();
+
+  function logout() {
+    dispatch(logOutUser());
+    setShowProfile(false)
+  }
+
   const menuItems = [
     { icon: FaRegUserCircle, text: "Account", href: "/" },
     { icon: IoSettingsOutline, text: "Settings", href: "/" },
-    { icon: FiPackage, text: "Products", href: "/" },
+    { icon: FiPackage, text: "Products", href: {PRODUCT_ROUTE} },
     { icon: CiCreditCard2, text: "Billing", href: "/" },
     { icon: IoMdHelpCircleOutline, text: "Help", href: "/" },
-    { icon: HiOutlineLogout, text: "Log out", href: "/" },
+
   ];
   return (
     <section className=" h-auto w-full z-50  border-b-2 border-primary-50 dark:border-gray-700">
@@ -72,33 +81,53 @@ function MainHeader() {
             </span>
           </div>
           <div className="w-auto flex items-center gap-2 px-4 relative ">
-            <p className="text-3xl text-primary-700 dark:text-primary-400">
-              <FiUser />
-            </p>
-            {showProfile ? (
-              <Link href={SIGNUP_ROUTE}>
-                <p className="font-Poppins  text-text-muted dark:text-primary-50 hidden md:block">
-                  Sign Up/Sign In
-                </p>
-              </Link>
-            ) : (
-              <p className="md:flex md:flex-col font-Poppins  text-text-muted dark:text-primary-50 hidden ">
+            {user ? (
+              <div
+              onClick={toggleProfile}
+              className=" flex items-center gap-2 font-Poppins  text-text-muted dark:text-primary-50 "
+            >
+              <div className="border-2 border-primary-700 rounded-full w-10 h-10">
+                <Image
+                  src={userProfile}
+
+                  alt={MegaMart}
+                  className=" w-20  sm:inline-block rounded-full"
+                />
+              </div>
+              <div className="md:flex md:flex-col hidden">
                 <span className="font-poppins-medium text-sm">
                   Welcome Farindra
                 </span>
                 <span className="font-poppins-medium text-xs">
                   abc@gmail.com
                 </span>
+              </div>
+            </div>
+
+            ):(
+              <Link href={SIGNUP_ROUTE} className="flex items-center">
+              <p className="text-3xl text-primary-700 dark:text-primary-400">
+                <FiUser />
               </p>
-            )}
+              <p className="font-Poppins  text-text-muted dark:text-primary-50 hidden md:block">
+                Sign Up/Sign In
+              </p>
+            </Link>
+            )
+            }
+            {/* User Profile */}
             <div
-              className="py-1 bg-white w-52  shadow-md absolute top-14 right-0 hidden"
+              className={`${
+                showProfile
+                  ? "hidden"
+                  : "py-1 bg-white w-52 z-40 rounded-md shadow-md shadow-gray-500 absolute top-14 right-0"
+              }`}
               role="menu"
               aria-orientation="vertical"
               aria-labelledby="options-menu"
             >
               {menuItems.map((item, index) => (
-                <a
+                <Link
                   key={index}
                   href={item.href}
                   className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
@@ -109,8 +138,19 @@ function MainHeader() {
                     aria-hidden="true"
                   />
                   {item.text}
-                </a>
+                </Link>
               ))}
+              <button
+                  onClick={logout}
+                  className="w-full flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                  role="menuitem"
+                >
+                  <HiOutlineLogout
+                    className="mr-3 h-5 w-5 text-gray-400"
+                    aria-hidden="true"
+                  />
+                  Logout
+                </button>
             </div>
           </div>
         </div>

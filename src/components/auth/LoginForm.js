@@ -1,17 +1,16 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import logo from "@/assets/images/MegaMart.svg";
 import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
-import { useRouter } from "next/navigation";
 import { HOME_ROUTE, SIGNUP_ROUTE } from "@/constant/routes";
 import { loginApi } from "@/services/api/authApi";
 import PasswordField from "../Ui/PasswordField";
 import EmailField from "../Ui/EmailField";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginUser } from "@/redux/auth/authAction";
 
 const LoginForm = () => {
@@ -21,14 +20,18 @@ const LoginForm = () => {
     formState: { errors },
   } = useForm();
 
-  const router = useRouter(); //function navigate to home page after sucessfull login
+  const {loading, error} = useSelector((state)=>state.auth);
 
-  const [loading, setLoading] = useState(false);
 
   const dispatch = useDispatch();
   const submitForm = async (data) => {
     dispatch(loginUser(data));
   };
+
+  useEffect(() => {
+
+    toast.error(error, { autoClose: 1500 });
+   }, [error]);
   return (
     <div>
       <div>
@@ -92,7 +95,7 @@ const LoginForm = () => {
             <div className="py-4">
               <input
                 type="submit"
-                value={loginUser ? "Login" : "Submitting"}
+                value={loading ? "Submitting" : "Login"}
                 className="bg-primary-800 px-6 p-2 rounded-md font-Poppins text-primary-50"
               />
             </div>

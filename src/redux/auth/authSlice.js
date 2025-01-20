@@ -8,7 +8,13 @@ const authSlice = createSlice({
     user: null,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    logOutUser: (state) => {
+      state.user= null,
+      localStorage.removeItem("apiToken")
+    },
+
+  },
   extraReducers: (builder) =>
     builder
       .addCase(loginUser.pending, (state) => { // Loading = Pending
@@ -23,5 +29,5 @@ const authSlice = createSlice({
         state.loading = false; // after showing error stop loading
       }), 
 });
-
+export const { logOutUser }= authSlice.actions;
 export default authSlice.reducer;
