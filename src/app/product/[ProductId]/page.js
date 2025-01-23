@@ -7,6 +7,7 @@ import { FaRegHeart } from "react-icons/fa6";
 import ProductDetails from "@/components/product/ProductDetails";
 import broken_image from "@/assets/images/broken_image.svg";
 import { FaUserCircle } from "react-icons/fa";
+import ProductReview from "@/components/product/ProductReview";
 
 const page = async ({ params }) => {
   const id = (await params).ProductId;
@@ -23,7 +24,7 @@ const page = async ({ params }) => {
         {/* 1st cols [Product Image] */}
         <div className="w-[80%] h-auto p-6 relative">
           <Image
-            src={product.url || broken_image}
+            src={product.imageUrls[0] || broken_image}
             alt={product.name}
             width={400}
             height={400}
@@ -70,16 +71,26 @@ const page = async ({ params }) => {
                 MGFTX202
               </span>
             </p>
-            <p className=" font-Poppins  text-text-secondary dark:text-gray-100">
-              Availability:{" "}
-              <span className="text-green-600 dark:text-green-300 font-poppins-bold ">
-                In Stock {product.stock}
-              </span>
+            <p className=" flex font-Poppins  text-text-secondary dark:text-gray-100">
+              Availability:
+               <p className="flex font-poppins-bold ">
+                 {product.stock > 0 ? <span className="text-green-600 dark:text-green-300">In Stock <span className="bg-green-600 text-white px-2 rounded-md">{product.stock}</span></span> : <span className="text-red-600 dark:text-red-300 ">Out of Stock</span>}
+              </p>
             </p>
           </div>
           {/* Short Description */}
           <div className="py-4">
+          <div className="font-Poppins flex items-center gap-2 py-4">
+            <FaUserCircle className="text-primary-700 dark:text-primary-400" />
+              <p className="text-text-default dark:text-gray-300">Seller: <span className="">{product.createdBy}</span></p> 
+          </div>
             <div>
+            <p className="text-text-secondary dark:text-gray-300 font-poppins-medium">
+                Description:
+              </p>
+              <p className="text-sm font-Poppins text-text-default dark:text-gray-200 py-2">
+                {product.description}
+              </p>
               <p className="text-text-secondary dark:text-gray-300 font-poppins-medium">
                 Key Specification:
               </p>
@@ -118,15 +129,12 @@ const page = async ({ params }) => {
               <FaRegHeart />
             </button>
           </div>
-          <div className="font-Poppins flex items-center gap-2 py-4">
-            <FaUserCircle className="text-primary-700 dark:text-primary-400" />
-              <p className="text-text-default dark:text-gray-300">Seller: <span className="">{product.createdBy}</span></p> 
-          </div>
+
         </div>
       </div>
       <section className="py-10">
         <div>
-          <ProductDetails />
+          <ProductDetails product={product} />
         </div>
       </section>
     </section>

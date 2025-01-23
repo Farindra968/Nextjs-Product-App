@@ -13,11 +13,11 @@ const ProductCard = ({ product }) => {
 
   return (
     <section>
-      <div className="bg-white rounded-xl overflow-hidden  transition-all duration-300 shadow-md">
+      <div className="bg-white dark:bg-gray-700 rounded-xl overflow-hidden  transition-all duration-300 shadow-md dark:shadow-gray-600">
         <div className="relative">
-          <div className="relative h-44 sm:h-64 w-full">
+          <div className="relative h-56 sm:h-56 w-full">
             <Image
-              src={product.url || broken_image}
+              src={product.imageUrls[0] || broken_image}
               alt={product.name}
               layout="fill"
               objectFit="cover"
@@ -25,26 +25,29 @@ const ProductCard = ({ product }) => {
             />
           </div>
           <div className="absolute top-4 right-4 bg-white rounded-full p-2 shadow-md">
-            <Link href={`${PRODUCT_ROUTE}/edit/${product._id}`}>
+            <Link href={`${PRODUCT_ROUTE}/edit/${product.id}`}>
             <MdEditSquare className="h-5 w-5 text-gray-500  cursor-pointer transition-colors duration-300" />
             </Link>
           </div>
           <div className="absolute top-4 left-4 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-md">
             Save {Math.round(discountOffer)}%
           </div>
-        </div>
-        <div className="px-4 py-6 ">
-          <span className="text-xs sm:text-sm inline-block font-semibold px-2 mr-2 bg-primary-300 rounded-md text-primary-900 mb-2">
+          <div className=" flex justify-between absolute bottom-0  text-xs font-bold px-2 py-1 rounded-md">
+          <p className="text-xs sm:text-sm inline-block font-semibold px-2 mr-2 bg-primary-200 rounded-md text-primary-900 mb-2">
             {product.brand || "No Brand"}
-          </span>
-          <span className="text-xs sm:text-sm inline-block font-semibold px-2 bg-secondary-300 rounded-md text-secondary-900 mb-2">
+          </p>
+          <p className="text-xs sm:text-sm inline-block font-semibold px-2 bg-secondary-200 rounded-md text-secondary-900 mb-2">
             {product.category || "No Category"}
-          </span>
-          <h2 className=" h-10 text-sm sm:text-[18px] font-semibold text-primary-800">
+          </p>
+          </div>
+        </div>
+        <div className="px-4 py-4 ">
+          
+          <h2 className="dark:text-primary-200 h-10 text-sm sm:text-[18px] font-semibold text-primary-800 ">
             {product.name}
           </h2>
           <div className="flex flex-col sm:flex-row items-start my-1 sm:my-2">
-            <div className="flex items-center">
+            <div className="flex">
               {[...Array(5)].map((_, i) => (
                 <svg
                   key={i}
@@ -58,14 +61,14 @@ const ProductCard = ({ product }) => {
                 </svg>
               ))}
             </div>
-            <span className="text-gray-500 text-sm ml-2">20 Review</span>
+            <span className="text-gray-500 dark:text-gray-100 text-sm ml-2">20 Review</span>
           </div>
           <div className="flex items-center justify-between ">
           <div className="flex flex-col pb-2">
-            <span className="text-sm text-text-muted line-through ml-2">
+            <span className="text-sm text-text-muted dark:text-secondary-500 line-through ml-2">
                 रु {product.price}
               </span>
-              <span className="text-2xl font-bold text-primary-800">
+              <span className="text-2xl font-bold text-primary-800 dark:text-primary-100">
                 रु {Math.round(offerPrice)}
               </span>
             </div>
@@ -73,7 +76,7 @@ const ProductCard = ({ product }) => {
               Save {Math.round(discountOffer)}%
             </span>
           </div>
-          <Link href={`${PRODUCT_ROUTE}/${product._id}`}>
+          <Link href={`${PRODUCT_ROUTE}/${product.id}`}>
             <button className="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center transition-colors duration-300">
               <FiShoppingCart className=" mr-2 h-5 w-5" />
               Add to Cart

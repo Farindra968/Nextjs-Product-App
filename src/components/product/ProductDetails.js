@@ -3,8 +3,7 @@
 import React, { useState } from "react";
 import ProductReview from "./ProductReview";
 
-
-const ProductDetails = () => {
+const ProductDetails = ({ product }) => {
   const tab = [
     {
       id: 1,
@@ -44,48 +43,18 @@ const ProductDetails = () => {
       {isActive === 1 && (
         <div className="space-y-4 py-4 px-2">
           <p className="font-Poppins text-text-default dark:text-gray-200">
-            The iPhone 16, unveiled by Apple in September 2024, introduces
-            several notable enhancements over its predecessor. Available in
-            6.1-inch and 6.7-inch (iPhone 16 Plus) display sizes, it features a
-            durable aluminum design with a color-infused glass back, offered in
-            five vibrant colors: black, white, pink, teal, and ultramarine. The
-            iPhone 16, unveiled by Apple in September 2024, introduces several
-            notable enhancements over its predecessor. Available in 6.1-inch and
-            6.7-inch (iPhone 16 Plus) display sizes, it features a durable
-            aluminum design with a color-infused glass back, offered in five
-            vibrant colors: black, white, pink, teal, and ultramarine.{" "}
-          </p>
-          <p className="font-Poppins text-text-default dark:text-gray-200">
-            Powered by the new A18 chip, the iPhone 16 delivers significant
-            performance improvements and increased energy efficiency,
-            contributing to a substantial boost in battery life. The device
-            supports Wi-Fi 7, ensuring faster and more reliable wireless
-            connectivity.{" "}
-          </p>
-          <p className="font-Poppins text-text-default dark:text-gray-200">
-            A standout feature is the 48-megapixel Fusion camera, arranged
-            vertically, which offers enhanced photo and video capabilities,
-            including spatial photo and video capture for immersive experiences.
-            The introduction of the Camera Control button provides users with
-            intuitive access to camera functions, streamlining the photography
-            experience.{" "}
-          </p>
-          <p className="font-Poppins text-text-default dark:text-gray-200">
-            Additionally, the iPhone 16 incorporates the Action Button,
-            previously exclusive to Pro models, allowing for customizable quick
-            access to various functions. The device is built for Apple
-            Intelligence, Apple's personal intelligence system designed to
-            deliver helpful and relevant experiences while protecting user
-            privacy.{" "}
+            {product.description}
           </p>
         </div>
       )}
       {isActive === 2 && (
-        <section className="px-2 py-4 font-Poppins text-text-default" >
+        <section className="px-2 py-4 font-Poppins text-text-default">
           <table className="table-auto w-full border-collapse border border-gray-200 text-left">
             <thead>
               <tr className="bg-gray-200">
-                <th className="border border-gray-300 px-4 py-2">Specification</th>
+                <th className="border border-gray-300 px-4 py-2">
+                  Specification
+                </th>
                 <th className="border border-gray-300 px-4 py-2">Details</th>
               </tr>
             </thead>
@@ -132,7 +101,9 @@ const ProductDetails = () => {
                 <td className="border border-gray-300 px-4 py-2">Wi-Fi 7</td>
               </tr>
               <tr className="bg-white">
-                <td className="border border-gray-300 px-4 py-2">Battery Life</td>
+                <td className="border border-gray-300 px-4 py-2">
+                  Battery Life
+                </td>
                 <td className="border border-gray-300 px-4 py-2">
                   Improved, with energy-efficient performance
                 </td>
@@ -152,7 +123,9 @@ const ProductDetails = () => {
                 </td>
               </tr>
               <tr className="bg-gray-100">
-                <td className="border border-gray-300 px-4 py-2">Availability</td>
+                <td className="border border-gray-300 px-4 py-2">
+                  Availability
+                </td>
                 <td className="border border-gray-300 px-4 py-2">
                   Pre-orders began on September 13, 2024; Available from
                   September 20, 2024
@@ -162,13 +135,11 @@ const ProductDetails = () => {
           </table>
         </section>
       )}
-      {
-        isActive === 3 && (
-                  <div>
-                      <ProductReview/>
-            </div>
-        )
-      }
+      {isActive === 3 && (
+        <div>
+          <ProductReview />
+        </div>
+      )}
     </section>
   );
 };

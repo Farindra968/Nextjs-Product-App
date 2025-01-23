@@ -2,6 +2,8 @@ import "./globals.css";
 import config from "@/config/config";
 
 import MainLayout from "@/layout/MainLayout";
+import Provider from "@/redux/Provider.js";
+
 
 export const metadata = {
   title: config.appName,
@@ -10,11 +12,11 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className="light">
-      <body className="dark:bg-gray-800">
-
-                <MainLayout>{children}</MainLayout>
-
+    <html lang="en" >
+      <body className="">
+        <Provider>
+          <MainLayout className=''>{children}</MainLayout>
+        </Provider>
       </body>
     </html>
   );

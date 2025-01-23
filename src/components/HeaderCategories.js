@@ -33,7 +33,7 @@ const HeaderCategories = ({hideCategories=true,}) => {
   ]
 
   return (
-    <section className="h-auto w-full hidden lg:block border-b-2 border-primary-50 dark:border-gray-700">
+    <section className="h-auto w-full hidden lg:block border-b-2 bg-white dark:bg-gray-800 border-primary-50 dark:border-gray-700 z-20">
       <div className="max-w-[1200px] m-auto p-2">
         <div className="flex justify-between items-center">
           <div

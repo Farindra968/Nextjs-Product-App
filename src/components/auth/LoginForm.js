@@ -33,7 +33,7 @@ const LoginForm = () => {
     toast.error(error, { autoClose: 1500 });
    }, [error]);
   return (
-    <div>
+    <div className=''>
       <div>
         <h1 className="font-poppins-bold text-3xl dark:text-primary-50">
           Login

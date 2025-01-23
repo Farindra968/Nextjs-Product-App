@@ -3,24 +3,18 @@
 import HeaderCategories from "@/components/HeaderCategories";
 import MainHeader from "@/components/MainHeader";
 import TopHeader from "@/components/TopHeader";
-import { persistor, store } from "@/redux/store";
 import React from "react";
-import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
+import { useSelector } from "react-redux";
 
 const MainLayout = ({ children }) => {
+  const { theme } = useSelector((state) => state.userPreferences);
   return (
-    <Provider store={store}>
-            <PersistGate persistor={persistor}>
-
+    <main className={theme}>
       <TopHeader />
-      <div className="w-full z-50 sticky top-0 bg-white dark:bg-gray-800">
-        <MainHeader />
-      </div>
+        <MainHeader  />
       <HeaderCategories />
-        {children}
-        </PersistGate>
-    </Provider>
+      {children}
+    </main>
   );
 };
 

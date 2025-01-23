@@ -21,8 +21,9 @@ const page = () => {
   }, [user, router]);
 
   return (
+    <section className='bg-white dark:bg-gray-800'>
     <section className='max-w-screen-lg mx-auto p-4 md:p-6 '>
-    <div className='flex  justify-between items-center h-[90vh] shadow-md rounded-md '>
+    <div className='flex  justify-between items-center h-[90vh] shadow-md rounded-md  '>
       <div className='w-full hidden md:flex justify-center items-center bg-primary-800 h-full rounded-l-md'>
         <ImageBox image={Login}/>
       </div>
@@ -31,6 +32,7 @@ const page = () => {
       </div>
       
       </div>
+      </section>
       </section>
   )
 }

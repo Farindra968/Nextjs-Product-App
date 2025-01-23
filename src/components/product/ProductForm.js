@@ -19,7 +19,7 @@ const ProductForm = ({isEditing = false, product}) => {
     setLoading(true); /// loading true
     try {
       isEditing
-        ? await editProduct(product._id, data)
+        ? await editProduct(product.id, data)
         : await postProduct(data);
       
       toast.success(
@@ -43,10 +43,10 @@ const ProductForm = ({isEditing = false, product}) => {
   }
   return (
     <section>
-      <form onSubmit={handleSubmit(submitForm)}>
+      <form onSubmit={handleSubmit(submitForm)} className="">
         <label
           htmlFor="product name"
-          className="font-poppins-medium text-primary-800"
+          className="font-poppins-medium text-primary-800 dark:text-primary-50"
         >
           Product Name:
         </label>
@@ -58,11 +58,11 @@ const ProductForm = ({isEditing = false, product}) => {
           placeholder="e.g.: Iphone 16 Pro Max "
           className="my-2 w-full ring-2 ring-primary-300 p-2 px-4  rounded-md"
         />
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 grid-rows-subgrid gap-4 ">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 grid-rows-subgrid gap-4 ">
           <div>
             <label
               htmlFor="brand"
-              className="font-poppins-medium text-primary-800"
+              className="font-poppins-medium text-primary-800 dark:text-primary-50"
             >
               Brand Name:
             </label>
@@ -77,7 +77,7 @@ const ProductForm = ({isEditing = false, product}) => {
           <div>
             <label
               htmlFor="category"
-              className="font-poppins-medium text-primary-800"
+              className="font-poppins-medium text-primary-800 dark:text-primary-50"
             >
               Category Name:
             </label>
@@ -89,12 +89,27 @@ const ProductForm = ({isEditing = false, product}) => {
               className="font-Poppins my-2 w-full ring-2 ring-primary-300 focus:outline-none p-2 px-4  rounded-md"
             />
           </div>
-
+          <div>
+            <label
+              htmlFor="stock"
+              className="font-poppins-medium text-primary-800 dark:text-primary-50"
+            >
+              Stock:
+            </label>
+            <input
+              type="number"
+              id="stock"
+              name="stock"
+              {...register("stock")}
+              placeholder="99 "
+              className="font-Poppins my-2 w-full ring-2 ring-primary-300 focus:outline-none p-2 px-4  rounded-md"
+            />
+          </div>
           {/* Price */}
           <div>
             <label
-              htmlFor="category"
-              className="font-poppins-medium text-primary-800"
+              htmlFor="price"
+              className="font-poppins-medium text-primary-800 dark:text-primary-50"
             >
               Price:
             </label>
@@ -111,9 +126,9 @@ const ProductForm = ({isEditing = false, product}) => {
         <div>
           <label
             htmlFor="image"
-            className="font-poppins-medium text-primary-800"
+            className="font-poppins-medium text-primary-800 dark:text-primary-50"
           >
-            Price:
+            Product Image:
           </label>
           <input
             type="url"

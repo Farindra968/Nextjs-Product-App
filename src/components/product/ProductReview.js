@@ -41,7 +41,7 @@ const ProductReview = () => {
             <div className="mt-2 flex items-center gap-2 sm:mt-0">
               <div className="flex items-center gap-0.5">
                 {[...Array(5)].map((rate) => (
-                  <IoMdStar className="text-yellow-500 text-xl" />
+                  <IoMdStar key={rate} className="text-yellow-500 text-xl" />
                 ))}
               </div>
               <p className="text-sm font-medium leading-none text-gray-500 dark:text-gray-400">

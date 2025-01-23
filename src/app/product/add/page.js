@@ -4,7 +4,7 @@ import React from 'react'
 const AddProduct = () => {
   return (
     <section className='max-w-screen-xl m-auto px-14 py-10'>
-      <div>
+      <div className='h-[60vh]'>
         <ProductForm/>
       </div>
     </section>
