@@ -102,7 +102,7 @@ const discountOffer = ((product.price - offerPrice) / product.price) * 100;
   return (
     <div className="w-full mx-auto bg-white dark:bg-gray-700 rounded-md shadow-md px-3 py-2 overflow-hidden md:max-w-sm lg:max-w-md">
       <div className="relative ">
-        {product.imageUrls && product.imageUrls.length > 0 ? (
+        {product.imageUrls && product.imageUrls.length > 0 && (
           <>
             <img
               className="w-full h-56 object-cover object-center  rounded-lg "
@@ -111,10 +111,6 @@ const discountOffer = ((product.price - offerPrice) / product.price) * 100;
             />
 
           </>
-        ) : (
-          <div className="w-full h-56 bg-gray-200 flex items-center justify-center md:h-64 lg:h-72 rounded-lg">
-            No image available
-          </div>
         )}
         <div className="absolute top-0 right-0 bg-red-500 text-white px-2 py-1 m-2 rounded-md text-sm font-bold">
           {Math.round(discountOffer)}% OFF
