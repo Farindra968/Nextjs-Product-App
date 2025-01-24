@@ -13,7 +13,7 @@ const ProductFilterSidebar = () => {
   const pathname = usePathname();
   const [showFilter, setShowFilter] = useState();
   const [sortFilter, setSortFilter] = useState(JSON.stringify({ createdAt: -1 }));
-  const [filterLimit, setFilterlimit] = useState();
+  const [filterLimit, setFilterlimit] = useState(10);
 
   /// function to call sort
   function onchangeSort(e) {
@@ -31,11 +31,14 @@ const ProductFilterSidebar = () => {
     params.set("sort", sortFilter)
     
     router.push(pathname + "?" + params.toString())
+
     
   }
 
   // Filter reset function
-  function resetFilter(){
+  function resetFilter() {
+    setSortFilter([]);
+    setFilterlimit(10)
      router.push(PRODUCT_ROUTE)
   }
 
@@ -61,7 +64,7 @@ const ProductFilterSidebar = () => {
           </div>
           <div>
             <label htmlFor="sort" className="font-poppins-medium text-primary-900 dark:text-gray-200 " >Sort By:</label>
-            <select onChange={onchangeSort} defaultValue={sortFilter} name="sort" id="sort" className="w-full rounded-md my-2 py-1 border dark:bg-gray-700 dark:text-white border-primary-300 focus:outline-none">
+            <select onChange={onchangeSort} value={sortFilter} name="sort" id="sort" className="w-full rounded-md my-2 py-1 border dark:bg-gray-700 dark:text-white border-primary-300 focus:outline-none">
               <option value={JSON.stringify({ createdAt: -1 })}>Latest</option>
               <option value={JSON.stringify({ createdAt: 1 })}>Oldest</option>
               <option value={JSON.stringify({ price: -1 })}>High to Low</option>
@@ -71,10 +74,12 @@ const ProductFilterSidebar = () => {
           {/* Limit */}
           <div>
             <label htmlFor="limit" className="font-poppins-medium text-primary-900 dark:text-gray-200 " >Sort By:</label>
-            <select onChange={onchangeLimit}  name="limit" id="limit" className="w-full rounded-md my-2 py-1 border dark:bg-gray-700 dark:text-white border-primary-300 focus:outline-none">
-              <option value={5}>5</option>
+            <select onChange={onchangeLimit} value={filterLimit} name="limit" id="limit" className="w-full rounded-md my-2 py-1 border dark:bg-gray-700 dark:text-white border-primary-300 focus:outline-none">
               <option value={10}>10</option>
+              <option value={20}>20</option>
               <option value={30}>30</option>
+              <option value={40}>40</option>
+              <option value={50}>50</option>
 
             </select>
           </div>

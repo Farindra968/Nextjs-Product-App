@@ -1,4 +1,4 @@
-'use client'
+"use client";
 import { EDITPRODUCT_ROUTE, PRODUCT_ROUTE } from "@/constant/routes";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,95 +7,115 @@ import { FiShoppingCart, FiStar } from "react-icons/fi";
 import broken_image from "@/assets/images/broken_image.svg";
 import { MdEditSquare } from "react-icons/md";
 import React, { useState } from "react";
-import { FaHeart, FaStar } from "react-icons/fa";
+import {
+  FaCheckCircle,
+  FaEye,
+  FaHeart,
+  FaShoppingCart,
+  FaStar,
+} from "react-icons/fa";
 
-
-
-const ProductCard = ({ product }) => {
+const ProductCardList = ({ product }) => {
   const offerPrice = (product.price * 0.8).toFixed(2);
-const discountOffer = ((product.price - offerPrice) / product.price) * 100;
+  const discountOffer = ((product.price - offerPrice) / product.price) * 100;
 
   return (
-    <section>
-      <div className="bg-white dark:bg-gray-700 rounded-xl overflow-hidden  transition-all duration-300 shadow-md dark:shadow-gray-600">
-        <div className="relative">
-          <div className="relative h-56 sm:h-56 w-full">
+    <div className="w-full ">
+      <div className="bg-white dark:bg-gray-700 border dark:border-gray-800 rounded-lg shadow-md overflow-hidden">
+        <div className="flex flex-col md:flex-row justify-between items-center  gap-4">
+          {/* First column: Image */}
+          <div className="w-full md:w-1/2 relative flex justify-center items-center h-64 md:h-48  md:p-2">
             <Image
               src={product.imageUrls[0] || broken_image}
               alt={product.name}
-              layout="fill"
-              objectFit="cover"
-              className="transition-transform duration-300 hover:scale-105"
+              width={600}
+              height={600}
+              className=" object-cover md:w-full  h-full md:h-48 rounded-t-md md:rounded-md"
             />
-          </div>
-          <div className="absolute top-4 right-4 bg-white rounded-full p-2 shadow-md">
-            <Link href={`${PRODUCT_ROUTE}/edit/${product.id}`}>
-              <MdEditSquare className="h-5 w-5 text-gray-500  cursor-pointer transition-colors duration-300" />
-            </Link>
-          </div>
-          <div className="absolute top-4 left-4 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-md">
-            Save {Math.round(discountOffer)}%
-          </div>
-          <div className=" flex justify-between absolute bottom-0  text-xs font-bold px-2 py-1 rounded-md">
-            <p className="text-xs sm:text-sm inline-block font-semibold px-2 mr-2 bg-primary-200 rounded-md text-primary-900 mb-2">
-              {product.brand || "No Brand"}
-            </p>
-            <p className="text-xs sm:text-sm inline-block font-semibold px-2 bg-secondary-200 rounded-md text-secondary-900 mb-2">
-              {product.category || "No Category"}
-            </p>
-          </div>
-        </div>
-        <div className="px-4 py-4 ">
-          <h2 className="dark:text-primary-200 h-10 text-sm sm:text-[18px] font-semibold text-primary-800 ">
-            {product.name}
-          </h2>
-          <div className="flex flex-col sm:flex-row items-start my-1 sm:my-2">
-            <div className="flex">
-              {[...Array(5)].map((_, i) => (
-                <svg
-                  key={i}
-                  className={`w-4 h-4 ${
-                    i < 4.5 ? "text-yellow-400" : "text-gray-300"
-                  }`}
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
-                  <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                </svg>
-              ))}
-            </div>
-            <span className="text-gray-500 dark:text-gray-100 text-sm ml-2">
-              20 Review
+            <span className="absolute top-2 left-2 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded">
+              {Math.round(discountOffer)}% OFF
             </span>
           </div>
-          <div className="flex items-center justify-between ">
-            <div className="flex flex-col pb-2">
-              <span className="text-sm text-text-muted dark:text-secondary-500 line-through ml-2">
-                रु {product.price}
-              </span>
-              <span className="text-2xl font-bold text-primary-800 dark:text-primary-100">
-                रु {Math.round(offerPrice)}
-              </span>
+
+          {/* Second column: Title, Category, Rating, Attributes */}
+          <div className=" w-full px-4 md:px-0 ">
+            <h2 className="text-[22px] sm:text-2xl font-poppins-bold text-primary-800 dark:text-gray-100 pb-3">{product.name}</h2>
+            <div className="flex justify-between md:justify-start items-center gap-2 py-2">
+            <p className="text-sm text-gray-500 dark:text-gray-100">
+              Category: <span className="font-poppins-medium bg-primary-200 text-primary-900 px-1 rounded-md ">{product.category}</span>
+            </p>
+            <p className="text-sm text-gray-500 dark:text-gray-100">
+              Brand: <span className="font-poppins-medium bg-secondary-200 text-primary-900 px-1 rounded-md ">{product.brand}</span>
+            </p>
             </div>
-            <span className="hidden sm:inline-block bg-primary-100  text-primary-800 text-xs font-semibold px-2 py-1 rounded-full">
-              Save {Math.round(discountOffer)}%
-            </span>
+
+            <div className="py-2 flex items-center">
+              <span className="text-sm font-Poppins text-gray-700 dark:text-gray-50 mr-2">
+                Rating:
+              </span>
+              <div className="flex items-center">
+                {[...Array(5)].map((_, i) => (
+                  <FaStar
+                    key={i}
+                    className={`w-4 h-4 ${
+                      i < 5 ? "text-yellow-400" : "text-gray-300"
+                    }`}
+                  />
+                ))}
+                <span className="ml-2 text-sm text-gray-600 font-Poppins dark:text-gray-50">(20 reviews)</span>
+              </div>
+            </div>
+            <div>
+              <p className="hidden md:block font-Poppins text-sm text-gray-500 dark:text-gray-300">
+                <Link href={`${PRODUCT_ROUTE}/${product.id}`} className="hover:underline hover:font-poppins-medium">
+                {product.description.length > 100
+                  ? `${product.description.slice(0, 100)}...`
+                    : product.description}
+                </Link>
+                
+                  
+              </p>
+            </div>
           </div>
-          <Link href={`${PRODUCT_ROUTE}/${product.id}`}>
-            <button className="w-full bg-primary-600 hover:bg-primary-700 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center transition-colors duration-300">
-              <FiShoppingCart className=" mr-2 h-5 w-5" />
-              Add to Cart
-            </button>
-          </Link>
+
+          {/* Third column: Stock, Price, View Details, Add to Cart */}
+          <div className="w-full md:w-1/2 p-4 flex flex-col justify-end">
+            <div>
+              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                <FaCheckCircle className="mr-1" />
+                In Stock: {product.stock}
+              </span>
+
+              <div className="py-2 flex items-end gap-4">
+                <p className="text-3xl font-poppins-semibold text-gray-900 dark:text-gray-100">
+                  ${Math.round(offerPrice)}
+                </p>
+                <p className="font-poppins-semibold text-gray-700 dark:text-gray-300 line-through">
+                  ${product.price}
+                </p>
+              </div>
+            </div>
+
+            <div className="flex md:block w-full gap-4 py-2 md:space-y-2">
+            <Link href={`${PRODUCT_ROUTE}/${product.id}`}  className="w-full flex justify-center items-center px-4 py-2 border border-gray-300 dark:border-gray-500 rounded-md text-sm font-medium text-gray-700 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <FaEye className="inline-block mr-2" />
+                View Details
+                </Link>
+              <button className="w-full px-4 py-2 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-primary-600 hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
+                <FaShoppingCart className="inline-block mr-2" />
+                Add to Cart
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 
-const ProductCard1 = ({ product }) => {
+const ProductCard = ({ product }) => {
   const offerPrice = (product.price * 0.8).toFixed(2);
-const discountOffer = ((product.price - offerPrice) / product.price) * 100;
+  const discountOffer = ((product.price - offerPrice) / product.price) * 100;
 
   const [isWishlisted, setIsWishlisted] = useState(false);
 
@@ -109,7 +129,6 @@ const discountOffer = ((product.price - offerPrice) / product.price) * 100;
               src={product.imageUrls[0] || broken_image}
               alt="Product image"
             />
-
           </>
         )}
         <div className="absolute top-0 right-0 bg-red-500 text-white px-2 py-1 m-2 rounded-md text-sm font-bold">
@@ -142,7 +161,9 @@ const discountOffer = ((product.price - offerPrice) / product.price) * 100;
                 fill="currentColor"
               />
             ))}
-            <span className="text-xs text-gray-500 dark:text-gray-300 ml-1">(42)</span>
+            <span className="text-xs text-gray-500 dark:text-gray-300 ml-1">
+              (42)
+            </span>
           </div>
         </div>
         <h2 className="text-[18px] font-semibold text-primary-800 dark:text-gray-100 h-10 mb-4">
@@ -179,4 +200,4 @@ const discountOffer = ((product.price - offerPrice) / product.price) * 100;
   );
 };
 
-export { ProductCard, ProductCard1 };
+export { ProductCardList, ProductCard };

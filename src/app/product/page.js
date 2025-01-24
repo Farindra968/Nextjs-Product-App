@@ -1,10 +1,11 @@
 
 import { getProduct } from "@/services/api/productApi"
-import { ProductCard, ProductCard1 } from "@/components/product/ProductCard"
 import { Title } from "@/components/Ui/Title"
 import Link from "next/link"
-import { ADDPRODUCT_ROUTE } from "@/constant/routes"
 import ProductFilterSidebar from "@/components/product/ProductFilterSidebar"
+import { ProductCard1 } from "@/components/product/ProductCard"
+import ProductSwitcher from "@/components/product/ProductSwitcher"
+import List from "@/components/product/List"
 
 const ProductList = async ({searchParams}) => {
   const product = await getProduct( await searchParams);
@@ -17,6 +18,7 @@ const ProductList = async ({searchParams}) => {
       <div className="flex justify-between items-center p-2 border-b-2 border-primary-300">
         <Title title='Product List' />
         <div className="flex items-center space-x-2">
+          <ProductSwitcher/>
             <ProductFilterSidebar />
 
         </div>
@@ -24,9 +26,7 @@ const ProductList = async ({searchParams}) => {
       <section className="flex justify-between gap-6">
 
         <div className="w-full">
-          <div className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 py-4`}>
-            {product.map((product) => <ProductCard1 key={product.id} product={product} />)}
-          </div>
+          <List productData={product} />
         </div>
       </section>
     </section>
