@@ -1,9 +1,9 @@
 import React from 'react'
 
-function Title() {
+function Title({title}) {
   return (
     <div>
-      <h1 className='text-xl md:text-2xl font-semibold text-primary-600'>Product List</h1>
+      <h1 className='text-xl md:text-2xl font-poppins-bold text-primary-600'>{title}</h1>
     </div>
   )
 }

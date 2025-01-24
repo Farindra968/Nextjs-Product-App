@@ -1,15 +1,19 @@
+'use client'
 import { EDITPRODUCT_ROUTE, PRODUCT_ROUTE } from "@/constant/routes";
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
 import { BiHeart } from "react-icons/bi";
 import { FiShoppingCart, FiStar } from "react-icons/fi";
 import broken_image from "@/assets/images/broken_image.svg";
 import { MdEditSquare } from "react-icons/md";
+import React, { useState } from "react";
+import { FaHeart, FaStar } from "react-icons/fa";
+
+
 
 const ProductCard = ({ product }) => {
   const offerPrice = (product.price * 0.8).toFixed(2);
-  const discountOffer = ((product.price - offerPrice) / product.price) * 100;
+const discountOffer = ((product.price - offerPrice) / product.price) * 100;
 
   return (
     <section>
@@ -26,23 +30,22 @@ const ProductCard = ({ product }) => {
           </div>
           <div className="absolute top-4 right-4 bg-white rounded-full p-2 shadow-md">
             <Link href={`${PRODUCT_ROUTE}/edit/${product.id}`}>
-            <MdEditSquare className="h-5 w-5 text-gray-500  cursor-pointer transition-colors duration-300" />
+              <MdEditSquare className="h-5 w-5 text-gray-500  cursor-pointer transition-colors duration-300" />
             </Link>
           </div>
           <div className="absolute top-4 left-4 bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-md">
             Save {Math.round(discountOffer)}%
           </div>
           <div className=" flex justify-between absolute bottom-0  text-xs font-bold px-2 py-1 rounded-md">
-          <p className="text-xs sm:text-sm inline-block font-semibold px-2 mr-2 bg-primary-200 rounded-md text-primary-900 mb-2">
-            {product.brand || "No Brand"}
-          </p>
-          <p className="text-xs sm:text-sm inline-block font-semibold px-2 bg-secondary-200 rounded-md text-secondary-900 mb-2">
-            {product.category || "No Category"}
-          </p>
+            <p className="text-xs sm:text-sm inline-block font-semibold px-2 mr-2 bg-primary-200 rounded-md text-primary-900 mb-2">
+              {product.brand || "No Brand"}
+            </p>
+            <p className="text-xs sm:text-sm inline-block font-semibold px-2 bg-secondary-200 rounded-md text-secondary-900 mb-2">
+              {product.category || "No Category"}
+            </p>
           </div>
         </div>
         <div className="px-4 py-4 ">
-          
           <h2 className="dark:text-primary-200 h-10 text-sm sm:text-[18px] font-semibold text-primary-800 ">
             {product.name}
           </h2>
@@ -61,11 +64,13 @@ const ProductCard = ({ product }) => {
                 </svg>
               ))}
             </div>
-            <span className="text-gray-500 dark:text-gray-100 text-sm ml-2">20 Review</span>
+            <span className="text-gray-500 dark:text-gray-100 text-sm ml-2">
+              20 Review
+            </span>
           </div>
           <div className="flex items-center justify-between ">
-          <div className="flex flex-col pb-2">
-            <span className="text-sm text-text-muted dark:text-secondary-500 line-through ml-2">
+            <div className="flex flex-col pb-2">
+              <span className="text-sm text-text-muted dark:text-secondary-500 line-through ml-2">
                 रु {product.price}
               </span>
               <span className="text-2xl font-bold text-primary-800 dark:text-primary-100">
@@ -88,4 +93,94 @@ const ProductCard = ({ product }) => {
   );
 };
 
-export { ProductCard };
+const ProductCard1 = ({ product }) => {
+  const offerPrice = (product.price * 0.8).toFixed(2);
+const discountOffer = ((product.price - offerPrice) / product.price) * 100;
+
+  const [isWishlisted, setIsWishlisted] = useState(false);
+
+  return (
+    <div className="w-full mx-auto bg-white dark:bg-gray-700 rounded-md shadow-md px-3 py-2 overflow-hidden md:max-w-sm lg:max-w-md">
+      <div className="relative ">
+        {product.imageUrls && product.imageUrls.length > 0 ? (
+          <>
+            <img
+              className="w-full h-56 object-cover object-center  rounded-lg "
+              src={product.imageUrls[0] || broken_image}
+              alt="Product image"
+            />
+
+          </>
+        ) : (
+          <div className="w-full h-56 bg-gray-200 flex items-center justify-center md:h-64 lg:h-72 rounded-lg">
+            No image available
+          </div>
+        )}
+        <div className="absolute top-0 right-0 bg-red-500 text-white px-2 py-1 m-2 rounded-md text-sm font-bold">
+          {Math.round(discountOffer)}% OFF
+        </div>
+        <button
+          className={`absolute bottom-0 right-2 p-2 rounded-full ${
+            isWishlisted ? "text-red-500" : "text-gray-900"
+          } hover:text-red-500 transition-colors duration-300`}
+          onClick={() => setIsWishlisted(!isWishlisted)}
+        >
+          <FaHeart
+            className="h-6 w-6"
+            fill={isWishlisted ? "currentColor" : "none"}
+          />
+        </button>
+      </div>
+      <div className="py-3 px-2">
+        <div className="flex justify-between gap-2 items-center mb-2">
+          <span className="text-xs font-semibold text-text-secondary dark:text-gray-200 uppercase tracking-wider">
+            {product.category || "Uncategorized"}
+          </span>
+          <div className="flex items-center">
+            {[...Array(5)].map((_, i) => (
+              <FaStar
+                key={i}
+                className={`h-4 w-4 ${
+                  i < 4 ? "text-yellow-400" : "text-gray-300"
+                }`}
+                fill="currentColor"
+              />
+            ))}
+            <span className="text-xs text-gray-500 dark:text-gray-300 ml-1">(42)</span>
+          </div>
+        </div>
+        <h2 className="text-[18px] font-semibold text-primary-800 dark:text-gray-100 h-10 mb-4">
+          {product.name}
+        </h2>
+
+        <div className="flex items-center justify-between mb-6">
+          <div className="flex items-center">
+            <span className="text-2xl font-bold text-gray-900 dark:text-primary-50">
+              ${Math.round(offerPrice)}
+            </span>
+            <span className="text-sm text-gray-500 dark:text-secondary-100  line-through ml-2">
+              ${product.price}
+            </span>
+          </div>
+          {product.stock ? (
+            <span className="text-xs font-semibold bg-green-300 px-2 rounded-md text-green-900">
+              In Stock
+            </span>
+          ) : (
+            <span className="text-xs font-semibold bg-red-300 px-2 rounded-md text-red-900">
+              Out of Stock
+            </span>
+          )}
+        </div>
+        <Link
+          href={`${PRODUCT_ROUTE}/${product.id}`}
+          className="bg-green-600 flex justify-center px-3 py-2 rounded-md text-white font-semibold hover:bg-green-900"
+        >
+          Buy Now
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+export { ProductCard, ProductCard1 };

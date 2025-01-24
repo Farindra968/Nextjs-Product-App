@@ -1,10 +1,12 @@
 import config from "@/config/config";
 import axios from "axios";
 import { apiToken } from "./autToken";
+import { formatSearchParams } from "@/helpers/formatParams";
 
 /// Fetching Product Data [R]
-const getProduct = async () => {
-  const response = await axios.get(`${config.apiUrl}/api/products?limit=100&sort={"createdAt":-1}`);
+const getProduct = async (searchParams) => {
+  const query = formatSearchParams(searchParams)
+  const response = await axios.get(`${config.apiUrl}/api/products?${query}`);
   return response.data;
 };
 

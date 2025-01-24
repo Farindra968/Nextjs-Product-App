@@ -11,7 +11,7 @@ import { CiCreditCard2, CiLight } from "react-icons/ci";
 import { FaRegUserCircle } from "react-icons/fa";
 import { IoInvertModeSharp, IoSettingsOutline } from "react-icons/io5";
 import Link from "next/link";
-import { PRODUCT_ROUTE, SIGNUP_ROUTE } from "@/constant/routes";
+import { ADDPRODUCT_ROUTE, PRODUCT_ROUTE, SIGNUP_ROUTE } from "@/constant/routes";
 import { useDispatch, useSelector } from "react-redux";
 import userProfile from "@/assets/images/userProfile.jpg";
 import Image from "next/image";
@@ -19,6 +19,8 @@ import { logOutUser } from "@/redux/auth/authSlice";
 import { MdLightMode, MdNightlight } from "react-icons/md";
 import { DARK_MODE, LIGHT_MODE } from "@/constant/theme";
 import { toggleTheme } from "@/redux/userPreference/userPrefrenceSlices";
+import { AiFillProduct } from "react-icons/ai";
+
 
 function MainHeader() {
   const { user } = useSelector((state) => state.auth); /// extreact user from redux state management
@@ -43,7 +45,7 @@ function MainHeader() {
     { icon: FaRegUserCircle, text: "Account", href: "/" },
     { icon: IoSettingsOutline, text: "Settings", href: "/" },
     { icon: FiPackage, text: "Products", href: `${PRODUCT_ROUTE}` },
-    { icon: CiCreditCard2, text: "Billing", href: "/" },
+    { icon: AiFillProduct, text: "Add Product", href: `${ADDPRODUCT_ROUTE}` },
     { icon: IoMdHelpCircleOutline, text: "Help", href: "/" },
   ];
   return (
