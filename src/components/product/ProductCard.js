@@ -24,7 +24,7 @@ const ProductCardList = ({ product }) => {
       <div className="bg-white dark:bg-gray-700 border dark:border-gray-800 rounded-lg shadow-md overflow-hidden">
         <div className="flex flex-col md:flex-row justify-between items-center  gap-4">
           {/* First column: Image */}
-          <div className="w-full md:w-1/2 relative flex justify-center items-center h-64 md:h-48  md:p-2">
+          <div className="w-full md:w-1/2 relative flex justify-center items-center h-72 md:h-48  md:p-2">
             <Image
               src={product.imageUrls[0] || broken_image}
               alt={product.name}
@@ -39,7 +39,7 @@ const ProductCardList = ({ product }) => {
 
           {/* Second column: Title, Category, Rating, Attributes */}
           <div className=" w-full px-4 md:px-0 ">
-            <h2 className="text-[22px] sm:text-2xl font-poppins-bold text-primary-800 dark:text-gray-100 pb-3">{product.name}</h2>
+            <h2 className="text-xl font-poppins-bold text-primary-800 dark:text-gray-100 pb-3">{product.name}</h2>
             <div className="flex justify-between md:justify-start items-center gap-2 py-2">
             <p className="text-sm text-gray-500 dark:text-gray-100">
               Category: <span className="font-poppins-medium bg-primary-200 text-primary-900 px-1 rounded-md ">{product.category}</span>
@@ -151,7 +151,7 @@ const ProductCard = ({ product }) => {
           />
         </button>
       </div>
-      <div className="py-3 px-2">
+      <div className="py-3">
         <div className="flex justify-between gap-2 items-center mb-2">
           <span className="text-xs font-semibold text-text-secondary dark:text-gray-200 uppercase tracking-wider">
             {product.category || "Uncategorized"}
@@ -171,7 +171,7 @@ const ProductCard = ({ product }) => {
             </span>
           </div>
         </div>
-        <h2 className="text-[18px] font-semibold text-primary-800 dark:text-gray-100 h-10 mb-4">
+        <h2 className="text-[16px] font-poppins-medium text-primary-800 dark:text-gray-100 h-12 mb-4">
           {product.name}
         </h2>
 
