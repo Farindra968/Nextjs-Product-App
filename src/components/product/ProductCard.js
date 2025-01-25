@@ -81,10 +81,15 @@ const ProductCardList = ({ product }) => {
           {/* Third column: Stock, Price, View Details, Add to Cart */}
           <div className="w-full md:w-1/2 p-4 flex flex-col justify-end">
             <div>
-              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+              {product.stock >0 ? <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
                 <FaCheckCircle className="mr-1" />
                 In Stock: {product.stock}
-              </span>
+              </span> :
+              <span className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-red-100 text-red-800">
+              <FaCheckCircle className="mr-1" />
+              Out of Stock:
+            </span>
+              }
 
               <div className="py-2 flex items-end gap-4">
                 <p className="text-3xl font-poppins-semibold text-gray-900 dark:text-gray-100">

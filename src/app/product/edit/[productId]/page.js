@@ -8,7 +8,7 @@ const EditProduct = async ({ params }) => {
   const product = await getProductId(id);
   return (
     <section className="max-w-screen-xl m-auto px-14 py-10">
-        <div className='h-[60vh]'>
+        <div className='h-auto'>
         <ProductForm isEditing={true} product={product} />
       </div>
     </section>

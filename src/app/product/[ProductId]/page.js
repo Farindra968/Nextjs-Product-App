@@ -29,9 +29,11 @@ const page = async ({ params }) => {
             width={400}
             height={400}
           />
+          
           <p className="flex justify-center items-center w-10 h-10 bg-secondary-800 font-poppins-semibold rounded-full text-sm text-white absolute top-2 right-5">
             {Math.round(discountOffer)}%
           </p>
+
         </div>
         {/* 2nd cols [Product Details] */}
         <div className="w-full h-auto p-6">
@@ -91,17 +93,8 @@ const page = async ({ params }) => {
               <p className="text-sm font-Poppins text-text-default dark:text-gray-200 py-2">
                 {product.description}
               </p>
-              <p className="text-text-secondary dark:text-gray-300 font-poppins-medium">
-                Key Specification:
-              </p>
-              {[...Array(5)].map((item) => (
-                <p key={item} className="flex items-center gap-2 py-1 px-2">
-                  <IoIosCheckmarkCircle className="text-text-default dark:text-gray-200" />
-                  <span className="text-sm font-Poppins text-text-default dark:text-gray-200">
-                    14th Generation Intel Core i7 14900HX Processor
-                  </span>
-                </p>
-              ))}
+
+
             </div>
           </div>
           <button className=" bg-secondary-700 hover:bg-secondary-800 text-white font-semibold py-2 px-4 rounded-lg flex items-center justify-center transition-colors duration-300">

@@ -1,68 +1,93 @@
 "use client";
+
 import { PRODUCT_ROUTE } from "@/constant/routes";
 import { editProduct, postProduct } from "@/services/api/productApi";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
 
-const ProductForm = ({isEditing = false, product}) => {
-  const { register, handleSubmit } = useForm({
-    values: product, // fetcing product data
+const ProductForm = ({ isEditing = false, product }) => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    values: product,
   });
-  
-  const [isLoading, setLoading] = useState(false); /// loading
 
-  const router = useRouter(); /// Refresh back to Product Page after edit or upload product
+  const [isLoading, setLoading] = useState(false);
+  const [localProductImages, setlocalProductImages] = useState([]);
+  const [productImages, setproductImages] = useState([]);
+
+  const router = useRouter();
 
   async function submitForm(data) {
-    setLoading(true); /// loading true
+    setLoading(true);
+
+    const formData = new FormData();
+    formData.append("name", data.name);
+    formData.append("brand", data.brand);
+    formData.append("category", data.category);
+    formData.append("stock", data.stock);
+    formData.append("price", data.price);
+    formData.append("description", data.description);
+    {
+      productImages.map((image) => {
+      formData.append("images", image)
+    })}
     try {
-      isEditing
-        ? await editProduct(product.id, data)
-        : await postProduct(data);
-      
+      isEditing ? await editProduct(product.id, data) : await postProduct(formData);
+
       toast.success(
-        isEditing ? "Product edit Sucessfully" : "Product add Sucessfully",
+        isEditing
+          ? "Product edited successfully"
+          : "Product added successfully",
         {
           autoClose: 1500,
-          onClose: () => { router.replace(PRODUCT_ROUTE) }
+          onClose: () => {
+            router.replace(PRODUCT_ROUTE);
+          },
         }
       );
-
-    } catch (error) { // detec error if error occur
-      toast.error(error.response.data,
-        {
-          autoClose: 1500,  // auto close after detech error
-        }
-      );
-
+    } catch (error) {
+      toast.error(error.response.data, {
+        autoClose: 1500,
+      });
     } finally {
-      setLoading(false); /// loading false at the end
+      setLoading(false);
     }
   }
+
   return (
-    <section>
-      <form onSubmit={handleSubmit(submitForm)} className="">
-        <label
-          htmlFor="product name"
-          className="font-poppins-medium text-primary-800 dark:text-primary-50"
-        >
-          Product Name:
-        </label>
-        <input
-          type="text"
-          id="name"
-          required
-          {...register("name")}
-          placeholder="e.g.: Iphone 16 Pro Max "
-          className="my-2 w-full ring-2 ring-primary-300 p-2 px-4  rounded-md"
-        />
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 grid-rows-subgrid gap-4 ">
+    <div className="max-w-screen-xl mx-auto p-4">
+      <h1 className="text-2xl font-poppins-bold text-primary-900 dark:text-primary-100 mb-6">
+        {isEditing ? "Edit Product" : "Add New Product"}
+      </h1>
+      <form onSubmit={handleSubmit(submitForm)} className="space-y-4">
+        <div>
+          <label
+            htmlFor="name"
+            className="block mb-1 font-poppins-medium text-primary-800 dark:text-primary-50"
+          >
+            Product Name:
+          </label>
+          <input
+            type="text"
+            id="name"
+            required
+            {...register("name")}
+            placeholder="e.g.: iPhone 16 Pro Max"
+            className="w-full p-2 border rounded"
+          />
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
           <div>
             <label
               htmlFor="brand"
-              className="font-poppins-medium text-primary-800 dark:text-primary-50"
+              className="block mb-1 font-poppins-medium text-primary-800 dark:text-primary-50"
             >
               Brand Name:
             </label>
@@ -70,87 +95,147 @@ const ProductForm = ({isEditing = false, product}) => {
               type="text"
               id="brand"
               {...register("brand")}
-              placeholder="e.g.: Apple, Samsung, etc "
-              className="font-Poppins my-2 w-full ring-2 ring-primary-300 focus:outline-none p-2 px-4  rounded-md"
+              placeholder="e.g.: Apple, Samsung, etc."
+              className="w-full p-2 border rounded"
             />
           </div>
           <div>
             <label
               htmlFor="category"
-              className="font-poppins-medium text-primary-800 dark:text-primary-50"
+              className="block mb-1 font-poppins-medium text-primary-800 dark:text-primary-50"
             >
-              Category Name:
+              Category:
             </label>
             <input
               type="text"
               id="category"
               {...register("category")}
-              placeholder="e.g.: Electronic, Smartphone "
-              className="font-Poppins my-2 w-full ring-2 ring-primary-300 focus:outline-none p-2 px-4  rounded-md"
+              placeholder="e.g.: Electronics, Smartphone"
+              className="w-full p-2 border rounded"
             />
           </div>
+        </div>
+
+        <div className="grid grid-cols-2 gap-4">
           <div>
             <label
               htmlFor="stock"
-              className="font-poppins-medium text-primary-800 dark:text-primary-50"
+              className="block mb-1 font-poppins-medium text-primary-800 dark:text-primary-50"
             >
               Stock:
             </label>
             <input
               type="number"
               id="stock"
-              name="stock"
-              {...register("stock")}
-              placeholder="99 "
-              className="font-Poppins my-2 w-full ring-2 ring-primary-300 focus:outline-none p-2 px-4  rounded-md"
+              {...register("stock", {
+                min: {
+                  value: 0,
+                  message: "Product Stock must be greater then 0",
+                },
+              })}
+              placeholder="5"
+              className="w-full p-2 border rounded"
             />
+            <p className="font-Poppins text-secondary-600">
+              {errors.stock?.message}
+            </p>
           </div>
-          {/* Price */}
           <div>
             <label
               htmlFor="price"
-              className="font-poppins-medium text-primary-800 dark:text-primary-50"
+              className="block mb-1 font-poppins-medium text-primary-800 dark:text-primary-50"
             >
               Price:
             </label>
             <input
               type="number"
               id="price"
-              name="price"
-              {...register("price")}
-              placeholder="99 "
-              className="font-Poppins my-2 w-full ring-2 ring-primary-300 focus:outline-none p-2 px-4  rounded-md"
+              {...register("price", {
+                min: {
+                  value: 0,
+                  message: "Product Price must be greater then 0",
+                },
+              })}
+              placeholder="99"
+              className="w-full p-2 border rounded"
             />
+            <p className="font-Poppins text-secondary-600">
+              {errors.price?.message}
+            </p>
           </div>
         </div>
+
         <div>
           <label
-            htmlFor="image"
-            className="font-poppins-medium text-primary-800 dark:text-primary-50"
+            htmlFor="description"
+            className="block mb-1 font-poppins-medium text-primary-800 dark:text-primary-50"
           >
-            Product Image:
+            Product Description:
           </label>
-          <input
-            type="url"
-            id="url"
-            name="url"
-            {...register("url")}
-            placeholder="Product image Link "
-            className="font-Poppins my-2 w-full ring-2 ring-primary-300 focus:outline-none p-2 px-4  rounded-md"
+          <textarea
+            id="description"
+            {...register("description")}
+            rows={10}
+            className="w-full p-2 border font-Poppins rounded"
           />
         </div>
-        <input
+
+        <div>
+          <label
+            htmlFor="images"
+            className="block mb-1 font-poppins-medium text-primary-800 dark:text-primary-50"
+          >
+            Product Images:
+          </label>
+          <input
+            type="file"
+            multiple
+            id="images"
+            onChange={(e) => {
+              const imageUrls = [];
+              const imageFiles = [];
+              Array.from(e.target?.files).map((file) => {
+                imageFiles.push(file);
+                imageUrls.push(URL.createObjectURL(file));
+              });
+              setproductImages(imageFiles);
+              setlocalProductImages(imageUrls);
+            }}
+            className="w-full p-2 border font-poppins-medium dark:text-primary-100 rounded"
+          />
+        </div>
+
+        {localProductImages.length > 0 && (
+          <div className="flex flex-wrap justify-start gap-3">
+            {localProductImages.map((image, index) => (
+              <Image
+                key={index}
+                src={image || "/placeholder.svg"}
+                alt={`Product image ${index + 1}`}
+                width={250}
+                height={250}
+                className="object-cover rounded"
+              />
+            ))}
+          </div>
+        )}
+
+        <button
           type="submit"
-          value={isLoading ?
-            "Submiting"
+          disabled={isLoading}
+          className={`w-full p-2 text-white bg-primary-600 rounded ${
+            isLoading ? "opacity-50 cursor-not-allowed" : "hover:bg-primary-700"
+          }`}
+        >
+          {isLoading
+            ? "Submitting..."
             : isEditing
-            ? "Edit"
-            : "Submit"}
-          className="font-poppins-semibold text-white outline-none bg-primary-500 focus:outline-2 outline-primary-500 rounded-md outline-offset-2 my-4  px-6 py-2"
-        />
+            ? "Save Changes"
+            : "Add Product"}
+        </button>
       </form>
       <ToastContainer />
-    </section>
+    </div>
   );
 };
 
