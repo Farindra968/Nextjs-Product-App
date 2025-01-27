@@ -40,4 +40,12 @@ const editProduct = async (id, data) => {
   return response.data;
 };
 
-export { getProduct, getProductId, postProduct, editProduct };
+
+/// Get Product by category using Get Method
+const getProductByCategory = async (category) => {
+  const response = await axios.get(`${config.apiUrl}/api/products/category/${category}`);
+
+  return response.data;
+}
+
+export { getProduct, getProductId, postProduct, editProduct, getProductByCategory };

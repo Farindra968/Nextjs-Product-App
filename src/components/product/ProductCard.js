@@ -66,11 +66,9 @@ const ProductCardList = ({ product }) => {
               </div>
             </div>
             <div>
-              <p className="hidden md:block font-Poppins text-sm text-gray-500 dark:text-gray-300">
-                <Link href={`${PRODUCT_ROUTE}/${product.id}`} className="hover:underline hover:font-poppins-medium">
-                {product.description.length > 100
-                  ? `${product.description.slice(0, 100)}...`
-                    : product.description}
+              <p className="hidden md:block font-Poppins max-h-9 overflow-hidden text-ellipsis text-sm text-gray-500 dark:text-gray-300">
+                <Link href={`${PRODUCT_ROUTE}/${product.id}`} className="hover:font-poppins-medium">
+                {product.description}
                 </Link>
                 
                   

@@ -8,6 +8,7 @@ import ProductDetails from "@/components/product/ProductDetails";
 import broken_image from "@/assets/images/broken_image.svg";
 import { FaUserCircle } from "react-icons/fa";
 import ProductReview from "@/components/product/ProductReview";
+import ImageViewer from "@/components/product/ImageViewer";
 
 const page = async ({ params }) => {
   const id = (await params).ProductId;
@@ -23,13 +24,9 @@ const page = async ({ params }) => {
       <div className="flex flex-col lg:flex-row justify-center items-center py-6">
         {/* 1st cols [Product Image] */}
         <div className="w-[80%] h-auto p-6 relative">
-          <Image
-            src={product.imageUrls[0] || broken_image}
-            alt={product.name}
-            width={400}
-            height={400}
-          />
-          
+          <div>
+            <ImageViewer product={product} />
+          </div>
           <p className="flex justify-center items-center w-10 h-10 bg-secondary-800 font-poppins-semibold rounded-full text-sm text-white absolute top-2 right-5">
             {Math.round(discountOffer)}%
           </p>

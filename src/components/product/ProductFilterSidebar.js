@@ -14,6 +14,7 @@ const ProductFilterSidebar = () => {
   const [showFilter, setShowFilter] = useState();
   const [sortFilter, setSortFilter] = useState(JSON.stringify({ createdAt: -1 }));
   const [filterLimit, setFilterlimit] = useState(10);
+  const [filterCategory, setFilterCategory] = useState([]);
 
   /// function to call sort
   function onchangeSort(e) {
@@ -24,11 +25,17 @@ const ProductFilterSidebar = () => {
     setFilterlimit(e.target.value)
   }
 
+  // filter category 
+  function onChangeCategory(e) {
+    console.log(e.target.value)
+  }
+
   ///Filter function 
   function productFilter() {
     const params = new URLSearchParams(searchParams.toString())
     params.set("limit", filterLimit)
     params.set("sort", sortFilter)
+    params.set("category", filterCategory)
     
     router.push(pathname + "?" + params.toString())
 
@@ -38,7 +45,8 @@ const ProductFilterSidebar = () => {
   // Filter reset function
   function resetFilter() {
     setSortFilter([]);
-    setFilterlimit(10)
+    setFilterlimit(10);
+    setFilterCategory("");
      router.push(PRODUCT_ROUTE)
   }
 
@@ -59,7 +67,7 @@ const ProductFilterSidebar = () => {
             <label htmlFor="sort" className="font-poppins-medium text-primary-900 dark:text-gray-200 " >Sort By:</label>
             <div className="w-full rounded-md my-2 py-4 bg-white dark:bg-gray-700 dark:text-white border border-primary-300 focus:outline-none relative">
               <CiSearch className="absolute top-2 left-2" />
-              <input type="text" name="search" id="search" placeholder="Search Product" className="w-full text-sm rounded-md py-1 pl-8 border-none bg-transparent focus:outline-none absolute top-0.5" />
+              <input onChange={onChangeCategory} value={filterCategory} type="text" name="search" id="search" placeholder="Search Product" className="w-full text-sm rounded-md py-1 pl-8 border-none bg-transparent focus:outline-none absolute top-0.5" />
             </div>
           </div>
           <div>

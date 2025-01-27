@@ -4,3 +4,4 @@ export const ADDPRODUCT_ROUTE = "/product/add"
 export const EDITPRODUCT_ROUTE = "/product/edit"
 export const LOGIN_ROUTE = "/login";
 export const SIGNUP_ROUTE = "/signup";
+export const DASHBOARD_ROUTE= "/dashboard"

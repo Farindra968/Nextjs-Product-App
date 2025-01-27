@@ -20,6 +20,7 @@ import { MdLightMode, MdNightlight } from "react-icons/md";
 import { DARK_MODE, LIGHT_MODE } from "@/constant/theme";
 import { toggleTheme } from "@/redux/userPreference/userPrefrenceSlices";
 import { AiFillProduct } from "react-icons/ai";
+import MobileSidebar from "./MobileSidebar";
 
 
 function MainHeader() {
@@ -53,9 +54,7 @@ function MainHeader() {
       <div className="flex justify-between items-center max-w-[1200px] m-auto p-3">
         {/* Icon and Logo */}
         <div className="flex items-center justify-center gap-4 w-auto h-auto">
-          <div className=" md:hidden flex justify-center items-center text-3xl text-primary-700 w-10 h-10 rounded-md  bg-primary-50 ">
-            <HiOutlineMenuAlt2 />
-          </div>
+          <MobileSidebar/>
           <Image
             src={MegaMart}
             alt={MegaMart}
@@ -65,7 +64,7 @@ function MainHeader() {
         {/* Search Box*/}
         <div className="w-full sm:w-1/2 flex mx-2 md:mx-0 ">
           <div className="bg-primary-50  w-full h-11 rounded-md md:px-4 relative">
-            <TfiMenuAlt className="lg:text-xl hidden sm:inline-block text-primary-700 absolute right-5 top-3" />
+            <TfiMenuAlt className="lg:text-xl hidden md:inline-block text-primary-700 absolute right-5 top-3" />
             <BsSearch className="lg:text-xl  text-primary-700 absolute left-2 md:left-5 top-3" />
             <input
               type="search"
@@ -96,8 +95,8 @@ function MainHeader() {
               >
                 <div className="border-2 border-primary-700 rounded-full w-10 h-10">
                   <Image
-                    src={userProfile}
-                    alt={MegaMart}
+                    src={user.profileImageUrl || userProfile }
+                    alt={user.name}
                     className=" w-20  sm:inline-block rounded-full"
                   />
                 </div>
