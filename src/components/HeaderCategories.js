@@ -5,7 +5,6 @@ import { MdLocalOffer } from "react-icons/md";
 import categoriesData from "../data/Categories";
 import { BiSolidOffer } from "react-icons/bi";
 import { FcFlashAuto } from "react-icons/fc";
-import { PRODUCT_ROUTE } from "@/constant/routes";
 
 
 const HeaderCategories = ({hideCategories=true,}) => {
@@ -14,7 +13,6 @@ const HeaderCategories = ({hideCategories=true,}) => {
   const handleTab = () => {
     setActiveTab((prev) => !prev); // Toggle the boolean state
   };
-
 
 
   const otherData = [

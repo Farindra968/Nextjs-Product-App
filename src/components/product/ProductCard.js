@@ -151,9 +151,9 @@ const ProductCard = ({ product }) => {
       </div>
       <div className="py-3">
         <div className="flex justify-between gap-2 items-center mb-2">
-          <span className="text-xs font-semibold text-text-secondary dark:text-gray-200 uppercase tracking-wider">
+          <Link href={`${PRODUCT_ROUTE}?category=${product.category}`} className="text-xs font-semibold text-text-secondary dark:text-gray-200 uppercase tracking-wider">
             {product.category || "Uncategorized"}
-          </span>
+          </Link>
           <div className="flex items-center">
             {[...Array(5)].map((_, i) => (
               <FaStar
